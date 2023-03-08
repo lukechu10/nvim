@@ -21,8 +21,10 @@ return {
 					name = "+vimrc",
 					s = { "<cmd>source $MYVIMRC<cr>", "Source $MYVIMRC" },
 					e = { "<cmd>edit $MYVIMRC<cr>", "Edit $MYVIMRC" }
-				}
-			}
+				},
+			},
+			    ["g"] = { name = "+goto" },
+			    ["q"] = { name = "+session" }
 		}, {})
 	end
 }

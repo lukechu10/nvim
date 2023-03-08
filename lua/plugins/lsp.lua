@@ -29,22 +29,27 @@ return {
 			local servers = {
 				'clangd', 'lua_ls', 'rust_analyzer', 'pyright', 'tsserver'
 			}
+			local function on_attach()
+				vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "Go to declaration" })
+				vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Go to definition" })
+				vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Show hover information" })
+				vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "Go to implementation" })
+				vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { desc = "Show signature help" })
+				vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition,
+				{ desc = "Go to type definition" })
+				vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, { desc = "Rename variable" })
+				vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, { desc = "Show code actions" })
+				vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "Show references" })
+				vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end,
+					{ desc = "Format current buffer" })
+			end
 			for _, lsp in ipairs(servers) do
 				lspconfig[lsp].setup {
-					-- on_attach = my_custom_on_attach,
+					on_attach = on_attach,
 					capabilities = capabilities
 				}
 			end
-		end,
-		keys = {
-			{
-				"<A-F>",
-				function()
-					vim.lsp.buf.format()
-				end,
-				desc = "Format buffer"
-			}
-		}
+		end
 	},
 	{
 		"williamboman/mason.nvim",
@@ -84,7 +89,7 @@ return {
 					-- documentation = cmp.config.window.bordered(),
 				},
 				mapping = cmp.mapping.preset.insert({
-					    ['<C-b>'] = cmp.mapping.sc	(-4),
+					    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
 					    ['<C-f>'] = cmp.mapping.scroll_docs(4),
 					    ['<C-Space>'] = cmp.mapping.complete(),
 					    ['<C-e>'] = cmp.mapping.abort(),
