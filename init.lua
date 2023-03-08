@@ -15,3 +15,4 @@ vim.cmd [[set number]]
 vim.cmd [[colorscheme tokyonight]]
 
 vim.cmd [[set tabstop=4]]
+
