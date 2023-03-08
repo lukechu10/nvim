@@ -1,0 +1,16 @@
+{
+    "workspace.library": [
+        "/home/lukew/.config/nvim",
+        "/home/lukew/.local/share/nvim/lazy/lazy.nvim",
+        "/home/lukew/.local/share/nvim/lazy/tokyonight.nvim",
+        "/home/lukew/.local/share/nvim/lazy/nvim-lspconfig",
+        "/home/lukew/.local/share/nvim/lazy/which-key.nvim",
+        "/home/lukew/.local/share/nvim/lazy/rust-tools.nvim",
+        "/home/lukew/.local/share/nvim/lazy/mason-lspconfig.nvim",
+        "/home/lukew/.local/share/nvim/lazy/mason.nvim",
+        "/usr/share/nvim/runtime",
+        "/usr/share/nvim/runtime/pack/dist/opt/matchit",
+        "/home/lukew/.local/state/nvim/lazy/readme",
+        "${3rd}/luassert/library"
+    ]
+}
