@@ -37,7 +37,7 @@ return {
 			require("nvim-tree").setup()
 		end,
 		keys = {
-			{ "<C-h>", "<cmd>NvimTreeToggle<cr>", desc = "Toggle file tree" }
+			{ "<C-h>", "<cmd>NvimTreeFindFile<cr>", desc = "Open file tree and find current file" }
 		}
 	},
 	{ "stevearc/dressing.nvim", event = "VeryLazy" },

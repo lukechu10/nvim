@@ -13,7 +13,6 @@ return {
 					name = "+file",
 					n = { "<cmd>enew<cr>", "New File" }
 				},
-				e = { "<cmd>NvimTreeToggle<cr>", "Toggle file tree" },
 				z = { "<cmd>:Lazy<cr>", "Plugin manager" },
 				v = {
 					name = "+vimrc",
