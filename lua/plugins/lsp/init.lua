@@ -1,3 +1,21 @@
+local function on_attach()
+	local tl = require("telescope.builtin")
+	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "Go to declaration" })
+	vim.keymap.set('n', 'gd', tl.lsp_definitions, { desc = "Go to definition" })
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Show hover information", noremap = true })
+	vim.keymap.set('n', 'gi', tl.lsp_implementations, { desc = "Go to implementation" })
+	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { desc = "Show signature help" })
+	vim.keymap.set('n', '<space>D', tl.lsp_type_definitions, { desc = "Go to type definition" })
+	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, { desc = "Rename variable" })
+	vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, { desc = "Show code actions" })
+	vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end,
+		{ desc = "Format current buffer" })
+
+	vim.keymap.set('n', 'gr', tl.lsp_references, { desc = "Show references" })
+	vim.keymap.set('n', '<space>p', tl.lsp_workspace_symbols, { desc = "Find workspace symbol" })
+end
+
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -29,24 +47,6 @@ return {
 			local servers = {
 				'clangd', 'lua_ls', 'rust_analyzer', 'pyright', 'tsserver'
 			}
-			local function on_attach()
-				local tl = require("telescope.builtin")
-				vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "Go to declaration" })
-				vim.keymap.set('n', 'gd', tl.lsp_definitions, { desc = "Go to definition" })
-				vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Show hover information" })
-				vim.keymap.set('n', 'gi', tl.lsp_implementations, { desc = "Go to implementation" })
-				vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { desc = "Show signature help" })
-				vim.keymap.set('n', '<space>D', tl.lsp_type_definitions,
-					{ desc = "Go to type definition" })
-				vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, { desc = "Rename variable" })
-				vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, { desc = "Show code actions" })
-				vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end,
-					{ desc = "Format current buffer" })
-
-				vim.keymap.set('n', 'gr', tl.lsp_references, { desc = "Show references" })
-				vim.keymap.set('n', '<space>p', tl.lsp_workspace_symbols,
-					{ desc = "Find workspace symbol" })
-			end
 			for _, lsp in ipairs(servers) do
 				lspconfig[lsp].setup {
 					on_attach = on_attach,
@@ -69,7 +69,11 @@ return {
 		"simrat39/rust-tools.nvim",
 		config = function()
 			local rt = require("rust-tools")
-			rt.setup()
+			rt.setup({
+				server = {
+					on_attach = on_attach
+				}
+			})
 		end
 	},
 }
