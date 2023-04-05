@@ -13,6 +13,13 @@ return {
 			require("mini.comment").setup()
 		end
 	},
+	{
+		"ggandor/leap.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("leap").add_default_mappings(true)
+		end
+	},
 
 	-- completion framework
 	{
@@ -49,18 +56,26 @@ return {
 					-- documentation = cmp.config.window.bordered(),
 				},
 				mapping = cmp.mapping.preset.insert({
-					    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-					    ["<C-Space>"] = cmp.mapping.complete(),
-					    ["<C-e>"] = cmp.mapping.abort(),
-					    ["<CR>"] = cmp.mapping.confirm({ select = true }) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+					["<C-b>"] = cmp.mapping.scroll_docs(-4),
+					["<C-f>"] = cmp.mapping.scroll_docs(4),
+					["<C-Space>"] = cmp.mapping.complete(),
+					["<C-e>"] = cmp.mapping.abort(),
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							local entry = cmp.get_selected_entry()
+							if not entry then
+								cmp.select_next_item({
+									behavior = cmp.SelectBehavior.Select })
+							end
+							cmp.confirm()
+						else
+							fallback()
+						end
+					end, { "i", "s", "c" }),
 				}),
 				sources = cmp.config.sources({
 						{ name = "nvim_lsp" },
-						{ name = "vsnip" } -- For vsnip users.
-						-- { name = "luasnip" }, -- For luasnip users.
-						-- { name = "ultisnips" }, -- For ultisnips users.
-						-- { name = "snippy" }, -- For snippy users.
+						{ name = "vsnip" },
 					},
 					{
 						{ name = "buffer" }
@@ -72,6 +87,14 @@ return {
 				sources = cmp.config.sources({
 					{ name = "cmp_git" } -- You can specify the `cmp_git` source if you were installed it.
 				}, { { name = "buffer" } })
+			})
+
+			vim.api.nvim_create_autocmd("BufRead", {
+				group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
+				pattern = "Cargo.toml",
+				callback = function()
+					cmp.setup.buffer({ sources = { { name = "crates" } } })
+				end,
 			})
 
 			-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won"t work anymore).
@@ -88,5 +111,8 @@ return {
 			-- })
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end
+	},
+	{
+		"hrsh7th/vim-vsnip",
 	}
 }

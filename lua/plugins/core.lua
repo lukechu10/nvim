@@ -1,2 +1,3 @@
-return {}
-
+return {
+	"tpope/vim-repeat"
+}

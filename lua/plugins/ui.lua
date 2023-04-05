@@ -44,7 +44,7 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = "BufReadPre",
-		config = {
+		opts = {
 			-- char = "▏",
 			char = "│",
 			filetype_exclude = { "help", "alpha", "dashboard", "lazy" },
@@ -81,6 +81,8 @@ return {
 			})
 		end
 	},
+
+	"RRethy/vim-illuminate",
 
 	"nvim-tree/nvim-web-devicons",
 

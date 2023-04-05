@@ -12,7 +12,8 @@ local function on_attach()
 		{ desc = "Format current buffer" })
 
 	vim.keymap.set('n', 'gr', tl.lsp_references, { desc = "Show references" })
-	vim.keymap.set('n', '<space>p', tl.lsp_workspace_symbols, { desc = "Find workspace symbol" })
+	vim.keymap.set('n', '<leader>fw', tl.lsp_workspace_symbols, { desc = "Find workspace symbol" })
+	vim.keymap.set('n', '<leader>fd', tl.lsp_document_symbols, { desc = "Find document symbol" })
 end
 
 
@@ -42,10 +43,12 @@ return {
 				}
 			}
 
+			require('lspconfig').taplo.setup {}
+
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require('lspconfig')
 			local servers = {
-				'clangd', 'lua_ls', 'rust_analyzer', 'pyright', 'tsserver'
+				'clangd', 'lua_ls', 'rust_analyzer', 'pyright', 'tsserver', 'taplo'
 			}
 			for _, lsp in ipairs(servers) do
 				lspconfig[lsp].setup {
@@ -55,6 +58,18 @@ return {
 			end
 		end
 	},
+	{
+		"jose-elias-alvarez/null-ls.nvim",
+		dependencies = "nvim-lua/plenary.nvim",
+		config = function()
+			local null_ls = require("null-ls")
+
+			null_ls.setup({
+				sources = {}
+			})
+		end
+	},
+
 	{
 		"williamboman/mason.nvim",
 		config = function()
