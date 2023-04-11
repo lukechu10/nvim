@@ -14,10 +14,6 @@ return {
 	{
 		"nvim-tree/nvim-tree.lua",
 		config = function()
-			vim.g.loaded_netrw = 1
-			vim.g.loaded_netrwPlugin = 1
-			vim.opt.termguicolors = true
-
 			local function open_nvim_tree(data)
 				-- buffer is a real file on the disk
 				local real_file = vim.fn.filereadable(data.file) == 1
@@ -86,5 +82,7 @@ return {
 
 	"nvim-tree/nvim-web-devicons",
 
-	"folke/tokyonight.nvim"
+	-- Themes
+	"folke/tokyonight.nvim",
+	"ellisonleao/gruvbox.nvim"
 }

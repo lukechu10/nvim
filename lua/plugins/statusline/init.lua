@@ -3,7 +3,7 @@ return {
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
 		opts = {
-			theme = "tokyonight",
+			theme = "auto",
 			sections = {
 				lualine_a = { 'mode' },
 				lualine_b = { 'branch', 'diff', 'diagnostics' },

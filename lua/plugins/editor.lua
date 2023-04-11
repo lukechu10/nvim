@@ -18,6 +18,12 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("leap").add_default_mappings(true)
+
+			-- Dim text when searching.
+			vim.api.nvim_create_autocmd("BufEnter", {
+				group = vim.api.nvim_create_augroup("LeapBackdropDim", { clear = true }),
+				command = "highlight LeapBackdrop guifg=#777777"
+			})
 		end
 	},
 
@@ -34,8 +40,8 @@ return {
 			"hrsh7th/cmp-vsnip",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-cmdline",
 			"hrsh7th/vim-vsnip",
-
 		},
 		config = function()
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
@@ -104,11 +110,16 @@ return {
 			})
 
 			-- Use cmdline & path source for ":" (if you enabled `native_menu`, this won"t work anymore).
-			-- cmp.setup.cmdline(":", {
-			--    mapping = cmp.mapping.preset.cmdline(),
-			--    sources = cmp.config.sources({{name = "path"}},
-			--                                  {{name = "cmdline"}})
-			-- })
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({ { name = "path" } },
+					{ {
+						name = "cmdline",
+						option = {
+							ignore_cmds = { 'Man', '!' }
+						}
+					} })
+			})
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end
 	},

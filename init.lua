@@ -1,3 +1,5 @@
+vim.cmd [[set guifont=CaskaydiaCove\ NF:h11]]
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -10,6 +12,12 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = ','
 
+-- Disable netrw because we have nvim-tree.
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+vim.opt.termguicolors = true
+
 require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
@@ -17,7 +25,8 @@ require("lazy").setup({
 	}
 })
 
-vim.cmd [[colorscheme tokyonight]]
+vim.o.background = "dark"
+vim.cmd [[colorscheme gruvbox]]
 
 vim.cmd [[set tabstop=4]]
 
