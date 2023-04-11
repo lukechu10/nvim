@@ -26,6 +26,7 @@ return {
 
 	{
 		"akinsho/bufferline.nvim",
+		event = "VimEnter",
 		opts = {
 			options = {
 				diagnostics = "nvim_lsp"
@@ -35,6 +36,7 @@ return {
 
 	{
 		"j-hui/fidget.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("fidget").setup()
 		end
