@@ -125,5 +125,10 @@ return {
 	},
 	{
 		"hrsh7th/vim-vsnip",
+	},
+
+	{
+		"sindrets/diffview.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" }
 	}
 }
