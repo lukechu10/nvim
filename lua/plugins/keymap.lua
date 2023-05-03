@@ -54,14 +54,15 @@ return {
 		})
 
 		local go_to_buffer_keymap = {
-			["<A-h>"] = { "<C-w>h", "Go to buffer on the left" },
-			["<A-j>"] = { "<C-w>j", "Go to buffer on the left" },
-			["<A-k>"] = { "<C-w>k", "Go to buffer on the left" },
-			["<A-l>"] = { "<C-w>l", "Go to buffer on the left" }
+			["<C-h>"] = { "<C-w>h", "Go to buffer on the left" },
+			["<C-j>"] = { "<C-w>j", "Go to buffer below" },
+			["<C-k>"] = { "<C-w>k", "Go to buffer above" },
+			["<C-l>"] = { "<C-w>l", "Go to buffer on the right" }
 		}
-		wk.register(go_to_buffer_keymap, { mode = "n" })
-		wk.register(go_to_buffer_keymap, { mode = "i" })
-		wk.register(go_to_buffer_keymap, { mode = "v" })
-		wk.register(go_to_buffer_keymap, { mode = "t" })
+		wk.register(go_to_buffer_keymap, { mode = "n", noremap = false })
+		wk.register(go_to_buffer_keymap, { mode = "v", noremap = false })
+
+		-- Remap jj to <Esc> in insert mode
+		vim.keymap.set("i", "jj", "<Esc>")
 	end
 }
