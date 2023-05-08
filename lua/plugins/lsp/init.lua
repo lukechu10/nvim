@@ -18,7 +18,14 @@ end
 
 return {
 	{
+		"folke/neoconf.nvim",
+		opts = {
+			local_settings = ".neoconf.json"
+		}
+	},
+	{
 		"neovim/nvim-lspconfig",
+		dependencies = { "folke/neoconf.nvim" },
 		config = function()
 			require("lspconfig").lua_ls.setup {
 				settings = {
@@ -59,7 +66,7 @@ return {
 	},
 	{
 		"jose-elias-alvarez/null-ls.nvim",
-		dependencies = "nvim-lua/plenary.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "folke/neoconf.nvim" },
 		config = function()
 			local null_ls = require("null-ls")
 
@@ -81,6 +88,7 @@ return {
 	"williamboman/mason-lspconfig.nvim",
 	{
 		"simrat39/rust-tools.nvim",
+		dependencies = { "folke/neoconf.nvim" },
 		config = function()
 			local rt = require("rust-tools")
 			rt.setup({
