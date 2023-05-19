@@ -3,6 +3,7 @@ local function on_attach()
 	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "Go to declaration" })
 	vim.keymap.set('n', 'gd', tl.lsp_definitions, { desc = "Go to definition" })
 	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Show hover information", noremap = true })
+	vim.keymap.set('n', 'J', vim.diagnostic.open_float, { desc = "Show diagnostics" })
 	vim.keymap.set('n', 'gi', tl.lsp_implementations, { desc = "Go to implementation" })
 	vim.keymap.set('n', '<space>D', tl.lsp_type_definitions, { desc = "Go to type definition" })
 	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, { desc = "Rename variable" })
@@ -17,16 +18,12 @@ end
 
 
 return {
-	{
-		"folke/neoconf.nvim",
-		opts = {
-			local_settings = ".neoconf.json"
-		}
-	},
+	"folke/neoconf.nvim",
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = { "folke/neoconf.nvim" },
 		config = function()
+			require("neoconf").setup {}
 			require("lspconfig").lua_ls.setup {
 				settings = {
 					Lua = {
@@ -54,7 +51,7 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require('lspconfig')
 			local servers = {
-				'clangd', 'lua_ls', 'rust_analyzer', 'pyright', 'tsserver', 'taplo'
+				'clangd', 'lua_ls', 'rust_analyzer', 'pyright', 'tsserver', 'taplo', 'jsonls'
 			}
 			for _, lsp in ipairs(servers) do
 				lspconfig[lsp].setup {
@@ -81,7 +78,7 @@ return {
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup {
-				ensure_installed = { "lua_ls", "rust_analyzer" }
+				ensure_installed = { "lua_ls", "rust_analyzer", "jsonls" }
 			}
 		end
 	},
