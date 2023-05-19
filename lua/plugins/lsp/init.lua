@@ -1,19 +1,19 @@
 local function on_attach()
 	local tl = require("telescope.builtin")
-	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "Go to declaration" })
-	vim.keymap.set('n', 'gd', tl.lsp_definitions, { desc = "Go to definition" })
-	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Show hover information", noremap = true })
-	vim.keymap.set('n', 'J', vim.diagnostic.open_float, { desc = "Show diagnostics" })
-	vim.keymap.set('n', 'gi', tl.lsp_implementations, { desc = "Go to implementation" })
-	vim.keymap.set('n', '<space>D', tl.lsp_type_definitions, { desc = "Go to type definition" })
-	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, { desc = "Rename variable" })
-	vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, { desc = "Show code actions" })
-	vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end,
+	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+	vim.keymap.set("n", "gd", tl.lsp_definitions, { desc = "Go to definition" })
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show hover information", noremap = true })
+	vim.keymap.set("n", "J", vim.diagnostic.open_float, { desc = "Show diagnostics" })
+	vim.keymap.set("n", "gi", tl.lsp_implementations, { desc = "Go to implementation" })
+	vim.keymap.set("n", "<space>D", tl.lsp_type_definitions, { desc = "Go to type definition" })
+	vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
+	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
+	vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format { async = true } end,
 		{ desc = "Format current buffer" })
 
-	vim.keymap.set('n', 'gr', tl.lsp_references, { desc = "Show references" })
-	vim.keymap.set('n', '<leader>fw', tl.lsp_workspace_symbols, { desc = "Find workspace symbol" })
-	vim.keymap.set('n', '<leader>fd', tl.lsp_document_symbols, { desc = "Find document symbol" })
+	vim.keymap.set("n", "gr", tl.lsp_references, { desc = "Show references" })
+	vim.keymap.set("n", "<leader>fw", tl.lsp_workspace_symbols, { desc = "Find workspace symbol" })
+	vim.keymap.set("n", "<leader>fd", tl.lsp_document_symbols, { desc = "Find document symbol" })
 end
 
 
@@ -28,12 +28,12 @@ return {
 				settings = {
 					Lua = {
 						runtime = {
-							-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-							version = 'LuaJIT'
+							-- Tell the language server which version of Lua you"re using (most likely LuaJIT in the case of Neovim)
+							version = "LuaJIT"
 						},
 						diagnostics = {
 							-- Get the language server to recognize the `vim` global
-							globals = { 'vim', 'require' }
+							globals = { "vim", "require" }
 						},
 						workspace = {
 							-- Make the server aware of Neovim runtime files
@@ -46,12 +46,13 @@ return {
 				}
 			}
 
-			require('lspconfig').taplo.setup {}
+			require("lspconfig").taplo.setup {}
 
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local lspconfig = require('lspconfig')
+			local lspconfig = require("lspconfig")
 			local servers = {
-				'clangd', 'lua_ls', 'rust_analyzer', 'pyright', 'tsserver', 'taplo', 'jsonls'
+				"clangd", "lua_ls", "rust_analyzer", "pyright", "taplo", "jsonls",
+				"tsserver", "tailwindcss", "cssls", "html"
 			}
 			for _, lsp in ipairs(servers) do
 				lspconfig[lsp].setup {
@@ -68,7 +69,11 @@ return {
 			local null_ls = require("null-ls")
 
 			null_ls.setup({
-				sources = {}
+				sources = {
+					null_ls.builtins.formatting.stylua,
+					null_ls.builtins.diagnostics.eslint,
+					null_ls.builtins.formatting.prettier,
+				}
 			})
 		end
 	},
@@ -78,7 +83,8 @@ return {
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup {
-				ensure_installed = { "lua_ls", "rust_analyzer", "jsonls" }
+				ensure_installed = { "lua_ls", "rust_analyzer", "pyright", "taplo", "jsonls",
+					"tsserver", "tailwindcss", "cssls", "html" }
 			}
 		end
 	},

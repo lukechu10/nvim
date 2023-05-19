@@ -7,7 +7,8 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "lua", "rust" }
+				ensure_installed = { "lua", "rust", "toml", "json", "jsonc", "javascript", "typescript",
+					"css", "html" }
 			})
 		end
 	},
