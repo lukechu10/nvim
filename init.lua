@@ -29,6 +29,7 @@ vim.o.background = "dark"
 vim.cmd [[colorscheme gruvbox]]
 
 vim.cmd [[set tabstop=4]]
+vim.cmd [[set scrolloff=4]]
 
 vim.wo.number = true
 vim.wo.relativenumber = true
