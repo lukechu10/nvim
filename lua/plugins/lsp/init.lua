@@ -19,12 +19,17 @@ end
 
 return {
 	"folke/neoconf.nvim",
+	"folke/neodev.nvim",
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { "folke/neoconf.nvim" },
+		dependencies = { "folke/neoconf.nvim", "folke/neodev.nvim" },
+		event = "VeryLazy",
 		config = function()
 			require("neoconf").setup {}
-			require("lspconfig").lua_ls.setup {
+			require("neodev").setup {}
+			local lspconfig = require("lspconfig")
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			lspconfig.lua_ls.setup {
 				settings = {
 					Lua = {
 						runtime = {
@@ -43,15 +48,12 @@ return {
 						-- Do not send telemetry data containing a randomized but unique identifier
 						telemetry = { enable = false }
 					}
-				}
+				},
+				on_attach = on_attach,
+				capabilities = capabilities,
 			}
-
-			require("lspconfig").taplo.setup {}
-
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local lspconfig = require("lspconfig")
 			local servers = {
-				"clangd", "lua_ls", "rust_analyzer", "pyright", "taplo", "jsonls",
+				"clangd", "rust_analyzer", "pyright", "jsonls", "taplo",
 				"tsserver", "tailwindcss", "cssls", "html"
 			}
 			for _, lsp in ipairs(servers) do
@@ -70,7 +72,6 @@ return {
 
 			null_ls.setup({
 				sources = {
-					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.diagnostics.eslint,
 					null_ls.builtins.formatting.prettier,
 				}
