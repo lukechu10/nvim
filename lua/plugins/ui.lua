@@ -159,7 +159,10 @@ return {
 		end
 	},
 
-	"RRethy/vim-illuminate",
+	{
+		"RRethy/vim-illuminate",
+		event = "VeryLazy"
+	},
 
 	"nvim-tree/nvim-web-devicons",
 

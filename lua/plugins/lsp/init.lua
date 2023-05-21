@@ -92,6 +92,7 @@ return {
 	{
 		"simrat39/rust-tools.nvim",
 		dependencies = { "folke/neoconf.nvim" },
+		event = "VeryLazy",
 		config = function()
 			local rt = require("rust-tools")
 			rt.setup({
