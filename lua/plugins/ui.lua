@@ -81,7 +81,7 @@ return {
 					-- If the current node is a directory get children status
 					if gs == nil then
 						gs = (node.git_status.dir.direct ~= nil and node.git_status.dir.direct[1])
-						    or (node.git_status.dir.indirect ~= nil and node.git_status.dir.indirect[1])
+							or (node.git_status.dir.indirect ~= nil and node.git_status.dir.indirect[1])
 					end
 
 					-- If the file is untracked, unstaged or partially staged, we stage it
@@ -152,7 +152,7 @@ return {
 					local stats = require("lazy").stats()
 					local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
 					dashboard.section.footer.val = "⚡ Neovim loaded " ..
-					    stats.count .. " plugins in " .. ms .. "ms"
+						stats.count .. " plugins in " .. ms .. "ms"
 					pcall(vim.cmd.AlphaRedraw)
 				end,
 			})
