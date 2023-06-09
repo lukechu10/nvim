@@ -1,4 +1,4 @@
-vim.cmd [[set guifont=CaskaydiaCove\ NF:h11]]
+vim.cmd [[set guifont=CaskaydiaCove\ Nerd\ Font:h11]]
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
