@@ -52,3 +52,12 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave"
 		end
 	end
 })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	group = vim.api.nvim_create_augroup("AutoFmt", { clear = true }),
+	callback = function()
+		vim.lsp.buf.format()
+	end
+})
+
+vim.cmd [[set shell=nu]]
