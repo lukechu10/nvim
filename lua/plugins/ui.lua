@@ -9,7 +9,21 @@ return {
 			{ "<leader>fg", "<cmd>Telescope live_grep<cr>",  desc = "Live Grep" },
 			{ "<leader>bb", "<cmd>Telescope buffers<cr>",    desc = "Buffers" },
 			{ "<leader>fh", "<cmd>Telescope help_tags<cr>",  desc = "Help tags" },
-		}
+		},
+		config = function()
+			require("telescope").setup({
+				defaults = {
+					mappings = {
+						i = {
+							["<C-h>"] = "which_key"
+						},
+						n = {
+							q = "close"
+						}
+					}
+				}
+			})
+		end
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
