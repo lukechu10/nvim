@@ -26,10 +26,10 @@ return {
 					}
 				},
 				["<F5>"] = { "<cmd>lua require('dap').continue()<CR>", "Continue" },
-				["S-<F5>"] = { "<cmd>lua require('dap').stop()<CR>", "Continue" },
+				["<F17>"] = { "<cmd>lua require('dap').close()<CR>", "Continue" },
 				["<F9>"] = { "<cmd>lua require('dap').toggle_breakpoint()<CR>", "Toggle Breakpoint" },
 				["<F11>"] = { "<cmd>lua require('dap').step_into()<CR>", "Step Into" },
-				["S-<F11>"] = { "<cmd>lua require('dap').step_out()<CR>", "Step Out" },
+				["<F23>"] = { "<cmd>lua require('dap').step_out()<CR>", "Step Out" },
 				["<F10>"] = { "<cmd>lua require('dap').step_over()<CR>", "Step Over" },
 			})
 
