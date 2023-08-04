@@ -42,10 +42,13 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/vim-vsnip",
+			-- Completion Menu UI
+			"onsails/lspkind.nvim",
 		},
 		config = function()
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			local cmp = require("cmp")
+			local lspkind = require("lspkind")
 
 			cmp.setup({
 				snippet = {
@@ -94,7 +97,14 @@ return {
 					},
 					{
 						{ name = "buffer" }
+					}),
+				formatting = {
+					format = lspkind.cmp_format({
+						mode = "symbol_text",
+						maxwidth = 50,
+						ellipsis_char = "...",
 					})
+				}
 			})
 
 			-- Set configuration for specific filetype.
