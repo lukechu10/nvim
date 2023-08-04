@@ -30,7 +30,7 @@ return {
 	-- completion framework
 	{
 		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
+		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
 			-- LSP completion source
 			"hrsh7th/cmp-nvim-lsp",
@@ -61,8 +61,8 @@ return {
 					end
 				},
 				window = {
-					-- completion = cmp.config.window.bordered(),
-					-- documentation = cmp.config.window.bordered(),
+					completion = cmp.config.window.bordered(),
+					documentation = cmp.config.window.bordered(),
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -93,6 +93,7 @@ return {
 				}),
 				sources = cmp.config.sources({
 						{ name = "nvim_lsp" },
+						{ name = "nvim_lsp_signature_help" },
 						{ name = "vsnip" },
 					},
 					{

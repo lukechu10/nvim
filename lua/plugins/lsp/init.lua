@@ -53,7 +53,7 @@ return {
 				capabilities = capabilities,
 			}
 			local servers = {
-				"clangd", "rust_analyzer", "pyright", "jsonls", "taplo",
+				"clangd", "pyright", "jsonls", "taplo",
 				"tsserver", "tailwindcss", "cssls", "html"
 			}
 			for _, lsp in ipairs(servers) do
@@ -61,6 +61,24 @@ return {
 					on_attach = on_attach,
 					capabilities = capabilities
 				}
+			end
+
+			local border = {
+				{ "╭", "FloatBorder" },
+				{ "─", "FloatBorder" },
+				{ "╮", "FloatBorder" },
+				{ "│", "FloatBorder" },
+				{ "╯", "FloatBorder" },
+				{ "─", "FloatBorder" },
+				{ "╰", "FloatBorder" },
+				{ "│", "FloatBorder" },
+			}
+			-- Set border globally.
+			local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+			function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+				opts = opts or {}
+				opts.border = opts.border or border
+				return orig_util_open_floating_preview(contents, syntax, opts, ...)
 			end
 		end
 	},
@@ -98,7 +116,10 @@ return {
 			local rt = require("rust-tools")
 			rt.setup({
 				server = {
-					on_attach = on_attach
+					on_attach = function(_, buffnr)
+						on_attach()
+						vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = buffnr })
+					end
 				}
 			})
 		end
