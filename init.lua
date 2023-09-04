@@ -1,4 +1,5 @@
 vim.cmd [[set guifont=CaskaydiaCove\ Nerd\ Font:h11]]
+vim.opt.shell = "nu"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -67,5 +68,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		vim.lsp.buf.format()
 	end
 })
-
-vim.cmd [[set shell=nu]]
