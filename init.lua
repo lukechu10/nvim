@@ -1,4 +1,4 @@
-vim.cmd [[set guifont=CaskaydiaCove\ Nerd\ Font:h11]]
+vim.cmd [[set guifont=CaskaydiaCove\ Nerd\ Font:h10]]
 vim.opt.shell = "nu"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

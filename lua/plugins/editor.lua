@@ -1,3 +1,6 @@
+vim.api.nvim_set_keymap('n', 'j', 'gj', {})
+vim.api.nvim_set_keymap('n', 'k', 'gk', {})
+
 return {
 	{
 		"windwp/nvim-autopairs",
