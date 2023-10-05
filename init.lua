@@ -54,11 +54,18 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave"
 	end
 })
 
+local term_id = vim.api.nvim_create_augroup("HideNumberInTerm", { clear = true })
 vim.api.nvim_create_autocmd({ "TermOpen" }, {
-	group = vim.api.nvim_create_augroup("HideNumberInTerm", { clear = true }),
+	group = term_id,
 	callback = function()
 		vim.wo.number = false
 		vim.wo.relativenumber = false
+	end
+})
+vim.api.nvim_create_autocmd({ "TermClose" }, {
+	group = term_id,
+	callback = function()
+		vim.wo.number = true
 	end
 })
 
