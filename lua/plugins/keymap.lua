@@ -62,7 +62,15 @@ return {
 		wk.register(go_to_buffer_keymap, { mode = "n", noremap = false })
 		wk.register(go_to_buffer_keymap, { mode = "v", noremap = false })
 
-		-- Remap jj to <Esc> in insert mode
+		-- Remap jj to <Esc> in insert and terminal mode
 		vim.keymap.set("i", "jj", "<Esc>")
+		vim.api.nvim_create_autocmd("TermOpen", {
+			callback = function()
+				print(vim.bo.filetype)
+				if vim.bo.filetype ~= "lazygit" then
+					vim.keymap.set("t", "jj", "<C-\\><C-n>", { buffer = true })
+				end
+			end
+		})
 	end
 }
