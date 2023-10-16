@@ -36,38 +36,15 @@ vim.cmd [[set scrolloff=4]]
 
 vim.wo.number = true
 vim.wo.relativenumber = true
-local id = vim.api.nvim_create_augroup("NumberToggle", { clear = true })
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
-	group = id,
-	callback = function()
-		if vim.wo.number == true and vim.api.nvim_get_mode() ~= "i" then
-			vim.wo.relativenumber = true
-		end
-	end
-})
-vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
-	group = id,
-	callback = function()
-		if vim.wo.number == true then
-			vim.wo.relativenumber = false
-		end
-	end
-})
 
-local term_id = vim.api.nvim_create_augroup("HideNumberInTerm", { clear = true })
-vim.api.nvim_create_autocmd({ "TermOpen" }, {
-	group = term_id,
-	callback = function()
-		vim.wo.number = false
-		vim.wo.relativenumber = false
-	end
-})
-vim.api.nvim_create_autocmd({ "TermClose" }, {
-	group = term_id,
-	callback = function()
-		vim.wo.number = true
-	end
-})
+vim.cmd [[
+	augroup LineNumbers
+		autocmd!
+		autocmd TermEnter * setlocal nonu nornu
+		autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
+		autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
+	augroup END
+]]
 
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = vim.api.nvim_create_augroup("AutoFmt", { clear = true }),
