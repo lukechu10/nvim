@@ -65,3 +65,8 @@ vim.g.clipboard = {
 	},
 	cache_enabled = 0,
 }
+
+vim.cmd [[
+	aunmenu PopUp.How-to\ disable\ mouse
+	aunmenu PopUp.-1-
+]]
