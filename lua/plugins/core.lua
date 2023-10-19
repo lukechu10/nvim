@@ -14,6 +14,9 @@ return {
 		keys = {
 			{ "<A-i>", "<cmd>lua require('FTerm').toggle()<cr>",            desc = "Toggle FTerm" },
 			{ "<A-i>", "<C-\\><C-n><cmd>lua require('FTerm').toggle()<cr>", mode = "t",           desc = "Toggle FTerm" },
+		},
+		opts = {
+			auto_close = false,
 		}
 	}
 }
