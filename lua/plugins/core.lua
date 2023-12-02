@@ -17,6 +17,7 @@ return {
 		},
 		opts = {
 			auto_close = false,
+			cmd = vim.opt.shell._value,
 		}
 	}
 }
