@@ -139,12 +139,15 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = "BufReadPre",
+		main = "ibl",
 		opts = {
-			-- char = "▏",
-			char = "│",
-			filetype_exclude = { "help", "alpha", "dashboard", "lazy" },
-			show_trailing_blankline_indent = false,
-			show_current_context = false,
+			indent = { char = "│" },
+			exclude = {
+				filetypes = { "help", "alpha", "dashboard", "lazy" },
+			},
+			scope = {
+				enabled = false,
+			},
 		},
 	},
 
