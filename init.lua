@@ -34,6 +34,11 @@ vim.cmd [[set shiftwidth=4]]
 
 vim.cmd [[set scrolloff=4]]
 
+vim.cmd [[
+set wrap
+set linebreak
+]]
+
 vim.wo.number = true
 vim.wo.relativenumber = true
 
