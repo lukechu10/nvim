@@ -6,7 +6,9 @@ return {
 		vim.o.timeoutlen = 300
 		local wk = require("which-key")
 
-		wk.setup()
+		wk.setup({
+			operators = { gc = "Comments" },
+		})
 		wk.register({
 			["<leader>"] = {
 				f = {
@@ -62,13 +64,19 @@ return {
 		wk.register(go_to_buffer_keymap, { mode = "n", noremap = false })
 		wk.register(go_to_buffer_keymap, { mode = "v", noremap = false })
 
-		-- Remap jj to <Esc> in insert and terminal mode
+		-- Remap jj, jk, kj, kk to <Esc> in insert and terminal mode
 		vim.keymap.set("i", "jj", "<Esc>")
+		vim.keymap.set("i", "jk", "<Esc>")
+		vim.keymap.set("i", "kj", "<Esc>")
+		vim.keymap.set("i", "kk", "<Esc>")
 		vim.api.nvim_create_autocmd("TermOpen", {
 			callback = function()
 				print(vim.bo.filetype)
 				if vim.bo.filetype ~= "lazygit" then
 					vim.keymap.set("t", "jj", "<C-\\><C-n>", { buffer = true })
+					vim.keymap.set("t", "jk", "<C-\\><C-n>", { buffer = true })
+					vim.keymap.set("t", "kj", "<C-\\><C-n>", { buffer = true })
+					vim.keymap.set("t", "kk", "<C-\\><C-n>", { buffer = true })
 				end
 			end
 		})
