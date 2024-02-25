@@ -8,7 +8,7 @@ return {
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = { "lua", "rust", "toml", "json", "jsonc", "javascript", "typescript",
-					"css", "html", "bash" }
+					"css", "html", "bash", "python" }
 			})
 		end
 	},
@@ -28,8 +28,11 @@ return {
 							["ac"] = "@class.outer",
 							-- You can optionally set descriptions to the mappings (used in the desc parameter of
 							-- nvim_buf_set_keymap) which plugins like which-key display
-							["ic"] = { query = "@class.inner", desc =
-							"Select inner part of a class region" },
+							["ic"] = {
+								query = "@class.inner",
+								desc =
+								"Select inner part of a class region"
+							},
 						},
 					},
 					include_surrounding_whitespace = true,
