@@ -39,6 +39,9 @@ set wrap
 set linebreak
 ]]
 
+vim.cmd [[set spelllang=en]]
+vim.cmd [[set spelloptions=camel]]
+
 vim.wo.number = true
 vim.wo.relativenumber = true
 

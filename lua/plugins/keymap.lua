@@ -64,6 +64,10 @@ return {
 		wk.register(go_to_buffer_keymap, { mode = "n", noremap = false })
 		wk.register(go_to_buffer_keymap, { mode = "v", noremap = false })
 
+		-- Remap <cr> to clear search highlights
+		vim.keymap.set("n", "<cr>", ":noh<cr><cr>",
+			{ noremap = true, silent = true, desc = "Clear search highlights" })
+
 		-- Remap jj, jk, kj, kk to <Esc> in insert and terminal mode
 		vim.keymap.set("i", "jj", "<Esc>")
 		vim.keymap.set("i", "jk", "<Esc>")
