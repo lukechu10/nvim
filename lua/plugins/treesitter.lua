@@ -27,6 +27,9 @@ return {
 
 							["ac"] = "@class.outer",
 							["ic"] = "@class.inner",
+
+							["ap"] = "@parameter.outer",
+							["ip"] = "@parameter.inner",
 						},
 					},
 					swap = {
