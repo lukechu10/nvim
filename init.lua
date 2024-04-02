@@ -1,5 +1,5 @@
 vim.cmd [[set guifont=CaskaydiaCove\ Nerd\ Font:h10]]
-vim.opt.shell = "nu"
+vim.opt.shell = "fish"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
