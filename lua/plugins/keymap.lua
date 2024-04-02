@@ -11,25 +11,6 @@ return {
 		})
 		wk.register({
 			["<leader>"] = {
-				f = {
-					name = "+find",
-				},
-				z = { "<cmd>:Lazy<cr>", "Plugin manager" },
-				v = {
-					name = "+vimrc",
-					s = { "<cmd>source $MYVIMRC<cr>", "Source $MYVIMRC" },
-					e = { "<cmd>edit $MYVIMRC<cr>", "Edit $MYVIMRC" }
-				},
-				q = { name = "+session" },
-				["<tab>"] = {
-					name = "+tabs",
-					n = { "<cmd>tabnew<cr>", "New tab" },
-					[","] = { "<cmd>tabprevious<cr>", "Previous" },
-					["."] = { "<cmd>tabnext<cr>", "Next" },
-					d = { "<cmd>tabclose<cr>", "Close" },
-					f = { "<cmd>tabfirst<cr>", "First" },
-					l = { "<cmd>tablast<cr>", "Last" }
-				},
 				b = {
 					name = "+buffers",
 					n = { "<cmd>enew<cr>", "New buffer in fullscreen" },
@@ -41,6 +22,13 @@ return {
 					f = { "<cmd>bfirst<cr>", "First" },
 					l = { "<cmd>blast<cr>", "Last" }
 				},
+				c = {
+					name = "+code",
+				},
+				f = {
+					name = "+find",
+				},
+				q = { name = "+session" },
 				t = {
 					name = "+terminal",
 					n = { "<cmd>terminal<cr>", "New terminal in fullscreen" },
@@ -48,6 +36,21 @@ return {
 						"New terminal with horizontal split" },
 					v = { "<cmd>vsplit<cr><C-w>l<cmd>terminal<cr>",
 						"New terminal with vertical split" }
+				},
+				v = {
+					name = "+vimrc",
+					s = { "<cmd>source $MYVIMRC<cr>", "Source $MYVIMRC" },
+					e = { "<cmd>edit $MYVIMRC<cr>", "Edit $MYVIMRC" }
+				},
+				z = { "<cmd>:Lazy<cr>", "Plugin manager" },
+				["<tab>"] = {
+					name = "+tabs",
+					n = { "<cmd>tabnew<cr>", "New tab" },
+					[","] = { "<cmd>tabprevious<cr>", "Previous" },
+					["."] = { "<cmd>tabnext<cr>", "Next" },
+					d = { "<cmd>tabclose<cr>", "Close" },
+					f = { "<cmd>tabfirst<cr>", "First" },
+					l = { "<cmd>tablast<cr>", "Last" }
 				}
 			},
 			["g"] = { name = "+goto" },

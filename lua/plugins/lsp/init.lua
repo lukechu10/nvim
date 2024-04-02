@@ -5,10 +5,10 @@ local function on_attach(client, bufnr)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show hover information", noremap = true })
 	vim.keymap.set("n", "J", vim.diagnostic.open_float, { desc = "Show diagnostics" })
 	vim.keymap.set("n", "gi", tl.lsp_implementations, { desc = "Go to implementation" })
-	vim.keymap.set("n", "<space>D", tl.lsp_type_definitions, { desc = "Go to type definition" })
-	vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
-	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
-	vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format { async = true } end,
+	vim.keymap.set("n", "<leader>D", tl.lsp_type_definitions, { desc = "Go to type definition" })
+	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
+	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
+	vim.keymap.set("n", "<leader>F", function() vim.lsp.buf.format { async = true } end,
 		{ desc = "Format current buffer" })
 
 	vim.keymap.set("n", "gr", tl.lsp_references, { desc = "Show references" })
