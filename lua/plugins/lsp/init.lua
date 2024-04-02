@@ -1,4 +1,4 @@
-local function on_attach()
+local function on_attach(client, bufnr)
 	local tl = require("telescope.builtin")
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
 	vim.keymap.set("n", "gd", tl.lsp_definitions, { desc = "Go to definition" })
@@ -14,6 +14,10 @@ local function on_attach()
 	vim.keymap.set("n", "gr", tl.lsp_references, { desc = "Show references" })
 	vim.keymap.set("n", "<leader>fw", tl.lsp_workspace_symbols, { desc = "Find workspace symbol" })
 	vim.keymap.set("n", "<leader>fd", tl.lsp_document_symbols, { desc = "Find document symbol" })
+
+	if client.server_capabilities.inlayHintProvider then
+		vim.lsp.inlay_hint.enable(bufnr, true)
+	end
 end
 
 
@@ -115,5 +119,12 @@ return {
 		"mrcjkb/rustaceanvim",
 		version = "^4",
 		ft = { "rust" },
+		config = function()
+			vim.g.rustaceanvim = {
+				server = {
+					on_attach = on_attach,
+				},
+			}
+		end,
 	},
 }
