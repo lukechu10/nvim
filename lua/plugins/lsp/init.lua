@@ -16,7 +16,9 @@ local function on_attach(client, bufnr)
 	vim.keymap.set("n", "<leader>fd", tl.lsp_document_symbols, { desc = "Find document symbol" })
 
 	if client.server_capabilities.inlayHintProvider then
-		vim.lsp.inlay_hint.enable(bufnr, true)
+		vim.lsp.inlay_hint.enable(true, {
+			bufnr = bufnr,
+		})
 	end
 end
 
