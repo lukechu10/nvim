@@ -28,8 +28,8 @@ return {
 							["ac"] = "@class.outer",
 							["ic"] = "@class.inner",
 
-							["ap"] = "@parameter.outer",
-							["ip"] = "@parameter.inner",
+							["aa"] = "@parameter.outer",
+							["ia"] = "@parameter.inner",
 						},
 					},
 					swap = {
