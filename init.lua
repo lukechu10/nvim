@@ -1,5 +1,14 @@
 vim.cmd [[set guifont=CaskaydiaCove\ Nerd\ Font:h10]]
-vim.opt.shell = "fish"
+if vim.fn.executable("fish") == 1 then
+	vim.opt.shell = "fish"
+elseif vim.fn.executable("pwsh.exe") == 1 then
+	vim.opt.shell = "pwsh.exe"
+	vim.o.shellxquote = ''
+	vim.o.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command '
+	vim.o.shellquote = ''
+	vim.o.shellpipe = '| Out-File -Encoding UTF8 %s'
+	vim.o.shellredir = '| Out-File -Encoding UTF8 %s'
+end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -12,6 +21,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = ','
+vim.g.maplocalleader = ','
 
 -- Disable netrw because we have nvim-tree.
 vim.g.loaded_netrw = 1
