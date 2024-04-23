@@ -40,11 +40,11 @@ return {
 			-- useful completion sources
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"hrsh7th/cmp-vsnip",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-cmdline",
-			"hrsh7th/vim-vsnip",
+			"saadparwaiz1/cmp_luasnip",
+			"L3MON4D3/LuaSnip",
 			-- Completion Menu UI
 			"onsails/lspkind.nvim",
 		},
@@ -55,12 +55,8 @@ return {
 
 			cmp.setup({
 				snippet = {
-					-- REQUIRED - you must specify a snippet engine
 					expand = function(args)
-						vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-						-- require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-						-- require("snippy").expand_snippet(args.body) -- For `snippy` users.
-						-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+						require("luasnip").lsp_expand(args.body)
 					end
 				},
 				window = {
@@ -97,7 +93,7 @@ return {
 				sources = cmp.config.sources({
 						{ name = "nvim_lsp" },
 						{ name = "nvim_lsp_signature_help" },
-						{ name = "vsnip" },
+						{ name = "luasnip" },
 					},
 					{
 						{ name = "buffer" }
@@ -147,18 +143,19 @@ return {
 		end
 	},
 	{
-		"hrsh7th/vim-vsnip",
+		"L3MON4D3/LuaSnip",
+		build = "make install_jsregexp",
 		config = function()
-			vim.cmd [[
-				" Jump forward or backward
-				imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-				smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-				imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-				smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-			]]
+			local ls = require('luasnip')
+			vim.keymap.set({ "i", "s" }, "<tab>", function() ls.jump(1) end, { silent = true })
+			vim.keymap.set({ "i", "s" }, "<S-tab>", function() ls.jump(-1) end, { silent = true })
+			vim.keymap.set({ "i", "s" }, "<C-E>", function()
+				if ls.choice_active() then
+					ls.change_choice(1)
+				end
+			end, { silent = true })
 		end
 	},
-
 	{
 		"sindrets/diffview.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" }
