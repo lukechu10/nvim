@@ -83,10 +83,10 @@ if vim.fn.has("wsl") == 1 then
 			},
 			paste = {
 				["+"] = function()
-					return vim.fn.systemlist('wl-paste --no-newline|sed -e "s/\r$//"', { '' }, 1) -- '1' keeps empty lines
+					return vim.fn.systemlist('wl-paste --no-newline|sed -e \"s/\r\\$//\"', { '' }, 1) -- '1' keeps empty lines
 				end,
 				["*"] = function()
-					return vim.fn.systemlist('wl-paste --primary --no-newline|sed -e "s/\r$//"', { '' }, 1)
+					return vim.fn.systemlist('wl-paste --primary --no-newline|sed -e \"s/\r\\$//\"', { '' }, 1)
 				end,
 			}
 		}
