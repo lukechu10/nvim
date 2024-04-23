@@ -44,7 +44,7 @@ local in_math = function()
 	return vim.fn['vimtex#syntax#in_mathzone']() == 1
 end
 
-return {
+local snippets = {
 	s("beg", fmta(
 		[[
 			\begin{<>}
@@ -53,7 +53,8 @@ return {
 		]],
 		{ i(1), i(0), rep(1) }
 	))
-}, {
+}
+local autosnippets = {
 	s(
 		{ trig = "mm", wordTrig = true },
 		fmta([[$<>$]], { i(1) })
@@ -95,34 +96,201 @@ return {
 		{ i(1), i(2) }
 	), { condition = in_math }),
 
-	s({
-		trig = "((\\d+)|(\\d*)(\\\\)?([A-Za-z]+)((\\^|_)(\\{\\d+\\}|\\d))*)\\/",
-		name = 'fraction',
-		dscr =
-		'auto fraction 1',
-		trigEngine = "ecma"
-	}, fmta(
-		[[\frac{<>}{<>}<>]], { f(capture(1)), i(1), i(0) }
+	-- FIXME: problem with jsregexp on Windows
+	-- s({
+	-- 	trig = "((\\d+)|(\\d*)(\\\\)?([A-Za-z]+)((\\^|_)(\\{\\d+\\}|\\d))*)\\/",
+	-- 	name = 'fraction',
+	-- 	dscr =
+	-- 	'auto fraction 1',
+	-- 	trigEngine = "ecma"
+	-- }, fmta(
+	-- 	[[\frac{<>}{<>}<>]], { f(capture(1)), i(1), i(0) }
+	-- ), { condition = in_math }),
+	-- s({ trig = '(^.*\\))/', name = 'fraction', dscr = 'auto fraction 2', trigEngine = "ecma" },
+	-- 	{ d(1, generate_fraction) },
+	-- 	{ condition = in_math }),
+	s({ trig = "(%a|%d)/", wordTrig = false, regTrig = true }, fmta(
+		[[\frac{<>}{<>}]],
+		{ f(capture(1)), i(1) }
 	), { condition = in_math }),
-	s({ trig = '(^.*\\))/', name = 'fraction', dscr = 'auto fraction 2', trigEngine = "ecma" },
-		{ d(1, generate_fraction) },
-		{ condition = in_math }),
 
 	-- Calculus
-	s("int", t("\\int")),
+	s("int", t("\\int"), { conditions = in_math }),
 
 	-- Postfix snippets
-	s({ trig = "(%a),.", wordTrig = false, regTrig = true }, fmta(
-		[[\vec{<>}]],
+	s({ trig = "(%a),,", name = "vector \\vb", wordTrig = false, regTrig = true }, fmta(
+		[[\vb{<>}]],
 		{ f(capture(1)) }
 	), { condition = in_math }),
-	s({ trig = "(%a).,", wordTrig = false, regTrig = true }, fmta(
-		[[\vec{<>}]],
+	s({ trig = "(%a)hat", name = "\\hat", regTrig = true }, fmta(
+		[[\hat{<>}]],
+		{ f(capture(1)) }
+	), { condition = in_math }),
+	s({ trig = "(%a),hat", name = "unit vector \\vb{\\hat }", regTrig = true }, fmta(
+		[[\vb{\hat{<>}}]],
 		{ f(capture(1)) }
 	), { condition = in_math }),
 
 	-- Bra-ket notation
+	-- Special handling: q inside a braket is autoamtically converted to \psi
+	s({ trig = "<(%a)|", name = "bra", regTrig = true }, fmta(
+		[[\bra{<>}]],
+		{ f(function(_, snips)
+			if snips.captures[1] == "q" then return "\\psi" else return snips.captures[1] end
+		end) }
+	), { condition = in_math }),
+	s({ trig = "|(%a)>", name = "ket", regTrig = true }, fmta(
+		[[\ket{<>}]],
+		{ f(function(_, snips)
+			if snips.captures[1] == "q" then return "\\psi" else return snips.captures[1] end
+		end) }
+	), { condition = in_math }),
+	s({ trig = "\\bra{(.*)}(%a)>", name = "braket", regTrig = true }, fmta(
+		[[\braket{<>}{<>}]],
+		{ f(capture(1)), f(function(_, snips)
+			if snips.captures[2] == "q" then return "\\psi" else return snips.captures[2] end
+		end) }
+	), { condition = in_math }),
 
 	-- Abbreviations
-	s("ooo", t("\\infty")),
+	s("ooo", t("\\infty"), { condition = in_math }),
 }
+
+-- Commands with auto_backslash.
+local auto_backslash_specs = {
+	-- Trig functions
+	"arcsin",
+	"sin",
+	"arccos",
+	"cos",
+	"arctan",
+	"tan",
+	"cot",
+	"csc",
+	"sec",
+	-- Other functions
+	"log",
+	"ln",
+	"exp",
+	-- Misc
+	"sup",
+	"inf",
+	"det",
+	"max",
+	"min",
+	"argmax",
+	"argmin",
+	"deg",
+	"angle",
+}
+local auto_backslash_snippets = {}
+for _, v in ipairs(auto_backslash_specs) do
+	table.insert(auto_backslash_snippets, s({ trig = v }, t("\\" .. v), { condition = in_math }))
+end
+vim.list_extend(autosnippets, auto_backslash_snippets)
+
+local greek_spec = {
+	-- Greek letters
+	"alpha",
+	"beta",
+	"gamma",
+	"Gamma",
+	"delta",
+	"Delta",
+	"epsilon",
+	"varepsilon",
+	"zeta",
+	"eta",
+	"theta",
+	"Theta",
+	"iota",
+	"kappa",
+	"lambda",
+	"Lambda",
+	"mu",
+	"nu",
+	"xi",
+	"pi",
+	"rho",
+	"sigma",
+	"Sigma",
+	"tau",
+	"upsilon",
+	"phi",
+	"varphi",
+	"chi",
+	"psi",
+	"Psi",
+	"omega",
+	"Omega",
+}
+local greek_snippets = {}
+for _, v in ipairs(greek_spec) do
+	table.insert(greek_snippets, s({ trig = v, wordTrig = false }, t("\\" .. v), { condition = in_math }))
+end
+vim.list_extend(autosnippets, greek_snippets)
+
+local symbol_specs = {
+	{ trig = "!=",           command = "\\neq" },
+	{ trig = "<=",           command = "\\leq" },
+	{ trig = ">=",           command = "\\geq" },
+	{ trig = "<<",           command = "\\ll" },
+	{ trig = ">>",           command = "\\gg" },
+	{ trig = "=>",           command = "\\implies" },
+	{ trig = "~~",           command = "\\sim" },
+	{ trig = "~=",           command = "\\approx" },
+	{ trig = "==",           command = "\\equiv" },
+	{ trig = ":=",           command = "\\definedas" },
+	{ trig = "**",           command = "\\cdot" },
+	{ trig = "xx",           command = "\\times" },
+
+	{ trig = "NN",           command = "\\mathbb{N}" },
+	{ trig = "ZZ",           command = "\\mathbb{Z}" },
+	{ trig = "QQ",           command = "\\mathbb{Q}" },
+	{ trig = "RR",           command = "\\mathbb{R}" },
+	{ trig = "CC",           command = "\\mathbb{C}" },
+
+	{ trig = "in",           command = "\\in" },
+	{ trig = "not in",       command = "\\notin" },
+	{ trig = "subset",       command = "\\subset" },
+	{ trig = "subseteq",     command = "\\subseteq" },
+	{ trig = "supset",       command = "\\supset" },
+	{ trig = "supseteq",     command = "\\supseteq" },
+	{ trig = "cup",          command = "\\cup" },
+	{ trig = "cap",          command = "\\cap" },
+	{ trig = "union",        command = "\\bigcup" },
+	{ trig = "intersection", command = "\\bigcap" },
+	{ trig = "empty",        command = "\\emptyset" },
+	{ trig = "forall",       command = "\\forall" },
+	{ trig = "exists",       command = "\\exists" },
+	{ trig = "nabla",        command = "\\nabla" },
+	{ trig = "grad",         command = "\\nabla" },
+	{ trig = "div",          command = "\\nabla \\cdot" },
+	{ trig = "curl",         command = "\\nabla \\times" },
+	{ trig = "partial",      command = "\\partial" },
+	{ trig = "inf",          command = "\\inf" },
+	{ trig = "sup",          command = "\\sup" },
+	{ trig = "lim",          command = "\\lim" },
+	{ trig = "liminf",       command = "\\liminf" },
+	{ trig = "limsup",       command = "\\limsup" },
+	{ trig = "to",           command = "\\to" },
+	{ trig = "->",           command = "\\to" },
+	{ trig = "mapsto",       command = "\\mapsto" },
+	{ trig = "infty",        command = "\\infty" },
+	{ trig = "pm",           command = "\\pm" },
+	{ trig = "mp",           command = "\\mp" },
+	{ trig = "times",        command = "\\times" },
+	{ trig = "cdot",         command = "\\cdot" },
+	{ trig = "cp",           command = "\\cross" },
+	{ trig = "div",          command = "\\div" },
+
+	{ trig = "dag",          command = "\\dagger" },
+}
+local symbol_snippets = {}
+for _, v in ipairs(symbol_specs) do
+	-- Add space after the command.
+	table.insert(symbol_snippets, s({ trig = v.trig }, t(v.command .. " "), { condition = in_math }))
+end
+vim.list_extend(autosnippets, symbol_snippets)
+
+return snippets, autosnippets
