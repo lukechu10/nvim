@@ -109,7 +109,7 @@ local autosnippets = {
 	-- s({ trig = '(^.*\\))/', name = 'fraction', dscr = 'auto fraction 2', trigEngine = "ecma" },
 	-- 	{ d(1, generate_fraction) },
 	-- 	{ condition = in_math }),
-	s({ trig = "(%a|%d)/", wordTrig = false, regTrig = true }, fmta(
+	s({ trig = "([%a%d\\_]+)/", wordTrig = true, regTrig = true }, fmta(
 		[[\frac{<>}{<>}]],
 		{ f(capture(1)), i(1) }
 	), { condition = in_math }),
@@ -133,19 +133,19 @@ local autosnippets = {
 
 	-- Bra-ket notation
 	-- Special handling: q inside a braket is autoamtically converted to \psi
-	s({ trig = "<(%a)|", name = "bra", regTrig = true }, fmta(
+	s({ trig = "<(%a)|", name = "bra", wordTrig = false, regTrig = true }, fmta(
 		[[\bra{<>}]],
 		{ f(function(_, snips)
 			if snips.captures[1] == "q" then return "\\psi" else return snips.captures[1] end
 		end) }
 	), { condition = in_math }),
-	s({ trig = "|(%a)>", name = "ket", regTrig = true }, fmta(
+	s({ trig = "|(%a)>", name = "ket", wordTrig = false, regTrig = true }, fmta(
 		[[\ket{<>}]],
 		{ f(function(_, snips)
 			if snips.captures[1] == "q" then return "\\psi" else return snips.captures[1] end
 		end) }
 	), { condition = in_math }),
-	s({ trig = "\\bra{(.*)}(%a)>", name = "braket", regTrig = true }, fmta(
+	s({ trig = "\\bra{(.*)}(%a)>", name = "braket", wordTrig = false, regTrig = true }, fmta(
 		[[\braket{<>}{<>}]],
 		{ f(capture(1)), f(function(_, snips)
 			if snips.captures[2] == "q" then return "\\psi" else return snips.captures[2] end
@@ -226,7 +226,9 @@ local greek_spec = {
 }
 local greek_snippets = {}
 for _, v in ipairs(greek_spec) do
-	table.insert(greek_snippets, s({ trig = v, wordTrig = false }, t("\\" .. v), { condition = in_math }))
+	table.insert(greek_snippets,
+		s({ trig = "(%d*)" .. v, wordTrig = true, regTrig = true }, { f(capture(1)), t("\\" .. v) },
+			{ condition = in_math }))
 end
 vim.list_extend(autosnippets, greek_snippets)
 

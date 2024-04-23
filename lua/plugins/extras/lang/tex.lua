@@ -8,6 +8,7 @@ return {
 			vim.g.vimtex_compiler_latexmk = {
 				executable = "latexmk.exe"
 			}
+			vim.g.vimtex_quickfix_mode = 0
 		end
 	}
 }
