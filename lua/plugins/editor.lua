@@ -52,6 +52,7 @@ return {
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
+			local ls = require("luasnip")
 
 			cmp.setup({
 				snippet = {
@@ -69,9 +70,19 @@ return {
 					["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
 					["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
 					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
+					["<C-e>"] = cmp.mapping(function()
+						if ls.choice_active(1) then
+							ls.change_choice(1)
+						else
+							cmp.abort()
+						end
+					end, { "i", "s", "c" }),
+					["<tab>"] = cmp.mapping(function(fallback)
+						if ls.expandable() then
+							ls.expand()
+						elseif ls.locally_jumpable(1) then
+							ls.jump(1)
+						elseif cmp.visible() then
 							local entry = cmp.get_selected_entry()
 							if not entry then
 								cmp.select_next_item({
@@ -81,7 +92,14 @@ return {
 						else
 							fallback()
 						end
-					end, { "i", "s", "c" }),
+					end, { "i", "s" }),
+					["<S-tab>"] = cmp.mapping(function()
+						if ls.locally_jumpable(-1) then
+							ls.jump(-1)
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
 					["<CR>"] = cmp.mapping(function(fallback)
 						if cmp.visible() and cmp.get_active_entry() then
 							cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
@@ -147,13 +165,14 @@ return {
 		build = "make install_jsregexp",
 		config = function()
 			local ls = require('luasnip')
-			vim.keymap.set({ "i", "s" }, "<tab>", function() ls.jump(1) end, { silent = true })
-			vim.keymap.set({ "i", "s" }, "<S-tab>", function() ls.jump(-1) end, { silent = true })
-			vim.keymap.set({ "i", "s" }, "<C-E>", function()
-				if ls.choice_active() then
-					ls.change_choice(1)
-				end
-			end, { silent = true })
+
+			require("luasnip.loaders.from_lua").load({ paths = "./lua/plugins/snippets" })
+
+			ls.setup({
+				enable_autosnippets = true,
+				store_selection_keys = "<tab>",
+				load_ft_func = require("luasnip.extras.filetype_functions").from_filetype_load
+			})
 		end
 	},
 	{
