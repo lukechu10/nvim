@@ -105,6 +105,7 @@ return {
 
 	{
 		"williamboman/mason.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup {
@@ -116,7 +117,11 @@ return {
 			}
 		end
 	},
-	"williamboman/mason-lspconfig.nvim",
+	{
+		"williamboman/mason-lspconfig.nvim",
+		event = "VeryLazy",
+		dependencies = "williamboman/mason.nvim"
+	},
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^4",

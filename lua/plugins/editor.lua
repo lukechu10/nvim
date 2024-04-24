@@ -162,6 +162,7 @@ return {
 	},
 	{
 		"L3MON4D3/LuaSnip",
+		event = "VeryLazy",
 		build = "make install_jsregexp",
 		config = function()
 			local ls = require('luasnip')
@@ -177,11 +178,13 @@ return {
 	},
 	{
 		"sindrets/diffview.nvim",
+		event = "VeryLazy",
 		dependencies = { "nvim-lua/plenary.nvim" }
 	},
 
 	{
 		"zbirenbaum/copilot.lua",
+		event = "VeryLazy",
 		config = function()
 			require("copilot").setup({
 				suggestion = {

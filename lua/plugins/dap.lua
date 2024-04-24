@@ -1,6 +1,7 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
+		event = "VeryLazy",
 		dependencies = { "nvim-neotest/nvim-nio" },
 		config = function()
 			local wk = require("which-key")
@@ -75,6 +76,7 @@ return {
 	},
 	{
 		"theHamsta/nvim-dap-virtual-text",
+		event = "VeryLazy",
 		dependencies = { "mfussenegger/nvim-dap" },
 		config = function()
 			require("nvim-dap-virtual-text").setup()
@@ -82,6 +84,7 @@ return {
 	},
 	{
 		"rcarriga/nvim-dap-ui",
+		event = "VeryLazy",
 		dependencies = { "mfussenegger/nvim-dap" },
 		config = function()
 			require("dapui").setup()

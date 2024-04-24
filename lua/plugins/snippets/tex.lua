@@ -133,19 +133,19 @@ local autosnippets = {
 
 	-- Bra-ket notation
 	-- Special handling: q inside a braket is autoamtically converted to \psi
-	s({ trig = "<(%a)|", name = "bra", wordTrig = false, regTrig = true }, fmta(
+	s({ trig = "<([%a_]+)|", name = "bra", wordTrig = false, regTrig = true }, fmta(
 		[[\bra{<>}]],
 		{ f(function(_, snips)
 			if snips.captures[1] == "q" then return "\\psi" else return snips.captures[1] end
 		end) }
 	), { condition = in_math }),
-	s({ trig = "|(%a)>", name = "ket", wordTrig = false, regTrig = true }, fmta(
+	s({ trig = "|([%a_]+)>", name = "ket", wordTrig = false, regTrig = true }, fmta(
 		[[\ket{<>}]],
 		{ f(function(_, snips)
 			if snips.captures[1] == "q" then return "\\psi" else return snips.captures[1] end
 		end) }
 	), { condition = in_math }),
-	s({ trig = "\\bra{(.*)}(%a)>", name = "braket", wordTrig = false, regTrig = true }, fmta(
+	s({ trig = "\\bra{(.*)}([%a_]+)>", name = "braket", wordTrig = false, regTrig = true }, fmta(
 		[[\braket{<>}{<>}]],
 		{ f(capture(1)), f(function(_, snips)
 			if snips.captures[2] == "q" then return "\\psi" else return snips.captures[2] end
