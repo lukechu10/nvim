@@ -52,7 +52,15 @@ local snippets = {
 			\end{<>}
 		]],
 		{ i(1), i(0), rep(1) }
-	))
+	)),
+	s("ali", fmta(
+		[[
+			\begin{align}
+				<>
+			\end{align}
+		]],
+		{ i(1) }
+	)),
 }
 local autosnippets = {
 	s(
@@ -97,22 +105,22 @@ local autosnippets = {
 	), { condition = in_math }),
 
 	-- FIXME: problem with jsregexp on Windows
-	-- s({
-	-- 	trig = "((\\d+)|(\\d*)(\\\\)?([A-Za-z]+)((\\^|_)(\\{\\d+\\}|\\d))*)\\/",
-	-- 	name = 'fraction',
-	-- 	dscr =
-	-- 	'auto fraction 1',
-	-- 	trigEngine = "ecma"
-	-- }, fmta(
-	-- 	[[\frac{<>}{<>}<>]], { f(capture(1)), i(1), i(0) }
-	-- ), { condition = in_math }),
-	-- s({ trig = '(^.*\\))/', name = 'fraction', dscr = 'auto fraction 2', trigEngine = "ecma" },
-	-- 	{ d(1, generate_fraction) },
-	-- 	{ condition = in_math }),
-	s({ trig = "([%a%d\\_]+)/", wordTrig = true, regTrig = true }, fmta(
-		[[\frac{<>}{<>}]],
-		{ f(capture(1)), i(1) }
+	s({
+		trig = "((\\d+)|(\\d*)(\\\\)?([A-Za-z]+)((\\^|_)(\\{\\d+\\}|\\d))*)\\/",
+		name = 'fraction',
+		desc =
+		'auto fraction 1',
+		trigEngine = "ecma"
+	}, fmta(
+		[[\frac{<>}{<>}]], { f(capture(1)), i(1) }
 	), { condition = in_math }),
+	s({ trig = '(^.*\\))/', name = 'fraction', desc = 'auto fraction 2', trigEngine = "ecma" },
+		{ d(1, generate_fraction) },
+		{ condition = in_math }),
+	-- s({ trig = "([%a%d\\_]+)/", wordTrig = true, regTrig = true }, fmta(
+	-- 	[[\frac{<>}{<>}]],
+	-- 	{ f(capture(1)), i(1) }
+	-- ), { condition = in_math }),
 
 	-- Calculus
 	s("int", t("\\int"), { conditions = in_math }),
