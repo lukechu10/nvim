@@ -44,6 +44,24 @@ local in_math = function()
 	return vim.fn['vimtex#syntax#in_mathzone']() == 1
 end
 
+local in_comment = function()
+	return vim.fn['vimtex#syntax#in_comment']() == 1
+end
+
+-- general env function
+local function env(name)
+	local is_inside = vim.fn["vimtex#env#is_inside"](name)
+	return (is_inside[1] > 0 and is_inside[2] > 0)
+end
+
+function in_preamble()
+	return not env("document")
+end
+
+function in_text()
+	return env("document") and not in_math()
+end
+
 local snippets = {
 	s("beg", fmta(
 		[[
@@ -52,7 +70,7 @@ local snippets = {
 			\end{<>}
 		]],
 		{ i(1), i(0), rep(1) }
-	)),
+	), { condition = in_text }),
 	s("ali", fmta(
 		[[
 			\begin{align}
@@ -60,21 +78,34 @@ local snippets = {
 			\end{align}
 		]],
 		{ i(1) }
-	)),
+	), { condition = in_text }),
+	s("ali*", fmta(
+		[[
+			\begin{align*}
+				<>
+			\end{align*}
+		]],
+		{ i(1) }
+	), { condition = in_text }),
 }
 local autosnippets = {
-	s(
-		{ trig = "mm", wordTrig = true },
-		fmta([[$<>$]], { i(1) })
-	),
-	s(
-		"nn",
-		fmta([[
+	----------------
+	-- Text snippets
+	----------------
+	s("bf", fmta(
+		[[\textbf{<>}]],
+		{ i(1) }
+	), { condition = in_text }),
+	s({ trig = "mm", wordTrig = true }, fmta(
+		[[$<>$]], { i(1) }
+	), { condition = in_text }),
+	s("nn", fmta(
+		[[
 			\[
 				<>
 			.\]
-		]], { i(1) })
-	),
+		]], { i(1) }
+	), { condition = in_text }),
 
 	----------------
 	-- Math snippets
@@ -87,6 +118,12 @@ local autosnippets = {
 	), { conditions = in_math }),
 	s({ trig = "sr", wordTrig = false }, t("^2"), { condition = in_math }),
 	s({ trig = "cb", wordTrig = false }, t("^3"), { condition = in_math }),
+
+	-- Exponential
+	s({ trig = "ee", wordTrig = false }, fmta(
+		[[e^{<>}]],
+		{ i(1) }
+	), { condition = in_math }),
 
 	-- Subscript
 	s({ trig = "(%a)(%d)", regTrig = true, name = "auto subscript" }, fmta(
@@ -225,6 +262,7 @@ local greek_spec = {
 	"tau",
 	"upsilon",
 	"phi",
+	"Phi",
 	"varphi",
 	"chi",
 	"psi",
@@ -260,7 +298,7 @@ local symbol_specs = {
 	{ trig = "RR",           command = "\\mathbb{R}" },
 	{ trig = "CC",           command = "\\mathbb{C}" },
 
-	{ trig = "in",           command = "\\in" },
+	{ trig = "inn",          command = "\\in" },
 	{ trig = "not in",       command = "\\notin" },
 	{ trig = "subset",       command = "\\subset" },
 	{ trig = "subseteq",     command = "\\subseteq" },

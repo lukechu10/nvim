@@ -7,6 +7,7 @@ return {
 			require("fidget").setup()
 		end,
 	},
+	"rcarriga/nvim-notify",
 	"tpope/vim-repeat",
 
 	{
