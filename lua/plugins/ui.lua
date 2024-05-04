@@ -188,5 +188,7 @@ return {
 
 	-- Themes
 	"folke/tokyonight.nvim",
-	"ellisonleao/gruvbox.nvim"
+	"ellisonleao/gruvbox.nvim",
+	"maxmx03/solarized.nvim",
+	"catppuccin/nvim",
 }

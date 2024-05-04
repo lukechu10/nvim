@@ -43,6 +43,17 @@ return {
 					e = { "<cmd>edit $MYVIMRC<cr>", "Edit $MYVIMRC" }
 				},
 				z = { "<cmd>:Lazy<cr>", "Plugin manager" },
+				C = {
+					name = "+colorscheme",
+					g = { "<cmd>set background=dark<cr><cmd>colorscheme gruvbox<cr>", "Gruvbox" },
+					t = { "<cmd>set background=dark<cr><cmd>colorscheme tokyonight<cr>", "Tokyo Night" },
+					s = { "<cmd>set background=light<cr><cmd>colorscheme solarized<cr>", "Solarized (Light)" },
+					-- Solarized light theme with transparent background.
+					S = { "<cmd>set background=light<cr><cmd>colorscheme solarized<cr><cmd>hi Normal guibg=NONE ctermbg=NONE<cr>", "Solarized (Light, Transparent)" },
+					l = { "<cmd>colorscheme catppuccin-latte<cr>", "Catppuccino Latte" },
+					-- Catppuccin Latte theme with transparent background.
+					L = { "<cmd>colorscheme catppuccin-latte<cr><cmd>hi Normal guibg=NONE ctermbg=NONE<cr>", "Catppuccin Latte (Transparent)" },
+				},
 				["<tab>"] = {
 					name = "+tabs",
 					n = { "<cmd>tabnew<cr>", "New tab" },
@@ -51,7 +62,7 @@ return {
 					d = { "<cmd>tabclose<cr>", "Close" },
 					f = { "<cmd>tabfirst<cr>", "First" },
 					l = { "<cmd>tablast<cr>", "Last" }
-				}
+				},
 			},
 			["g"] = { name = "+goto" },
 			H = { "<cmd>bprev<cr>", "Go to previous buffer" },

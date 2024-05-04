@@ -5,15 +5,17 @@ return {
 		ft = { "tex" },
 		init = function()
 			vim.cmd [[ filetype plugin indent on ]]
-			if vim.fn.has("win32") == 1 then
-				vim.g.vimtex_compiler_latexmk = {
-					executable = "latexmk.exe"
+			local latexmk = vim.fn.has("win32") == 1 and "latexmk.exe" or "latexmk"
+			vim.g.vimtex_compiler_latexmk = {
+				executable = latexmk,
+				options = {
+					"-verbose",
+					"-file-line-error",
+					"-synctex=1",
+					"-interaction=nonstopmode",
+					"-shell-escape"
 				}
-			else
-				vim.g.vimtex_compiler_latexmk = {
-					executable = "latexmk"
-				}
-			end
+			}
 			vim.g.vimtex_quickfix_mode = 0
 		end
 	},

@@ -154,13 +154,32 @@ local autosnippets = {
 	s({ trig = '(^.*\\))/', name = 'fraction', desc = 'auto fraction 2', trigEngine = "ecma" },
 		{ d(1, generate_fraction) },
 		{ condition = in_math }),
-	-- s({ trig = "([%a%d\\_]+)/", wordTrig = true, regTrig = true }, fmta(
-	-- 	[[\frac{<>}{<>}]],
-	-- 	{ f(capture(1)), i(1) }
-	-- ), { condition = in_math }),
 
 	-- Calculus
-	s("int", t("\\int"), { conditions = in_math }),
+	s({ trig = "dd(%a)(%d?) ", name = "differential", regTrig = true }, fmta(
+		[[\dd<>{<>}]],
+		{ f(function(_, snips)
+			if snips.captures[2] == "" then return "" else return "[" .. snips.captures[2] .. "]" end
+		end), f(capture(1)) }
+	), { condition = in_math }),
+	s({ trig = "d(%a)d(%a)(%d?) ", name = "derivative", regTrig = true }, fmta(
+		[[\dv<>{<>}{<>}]],
+		{ f(function(_, snips)
+			if snips.captures[3] == "" then return "" else return "[" .. snips.captures[3] .. "]" end
+		end), f(capture(1)), f(capture(2)) }
+	), { condition = in_math }),
+	s({ trig = "pdd(%a)(%d?) ", name = "differential", regTrig = true }, fmta(
+		[[\partial<>{<>}]],
+		{ f(function(_, snips)
+			if snips.captures[2] == "" then return "" else return "^{" .. snips.captures[2] .. "}" end
+		end), f(capture(1)) }
+	), { condition = in_math }),
+	s({ trig = "pd(%a)d(%a)(%d?) ", name = "derivative", regTrig = true }, fmta(
+		[[\pdv<>{<>}{<>}]],
+		{ f(function(_, snips)
+			if snips.captures[3] == "" then return "" else return "[" .. snips.captures[3] .. "]" end
+		end), f(capture(1)), f(capture(2)) }
+	), { condition = in_math }),
 
 	-- Postfix snippets
 	s({ trig = "(%a),,", name = "vector \\vb", wordTrig = false, regTrig = true }, fmta(
