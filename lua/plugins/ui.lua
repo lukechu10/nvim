@@ -1,28 +1,46 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.5",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		branch = "0.1.x",
+		dependencies = {
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+			"nvim-lua/plenary.nvim",
+		},
 		keys = {
 			mode = "n",
-			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-			{ "<leader>fg", "<cmd>Telescope live_grep<cr>",  desc = "Live Grep" },
-			{ "<leader>bb", "<cmd>Telescope buffers<cr>",    desc = "Buffers" },
-			{ "<leader>fh", "<cmd>Telescope help_tags<cr>",  desc = "Help tags" },
+			{ "<leader>ff", "<cmd>Telescope find_files<cr>",  desc = "Find files" },
+			{ "<leader>fg", "<cmd>Telescope live_grep<cr>",   desc = "Find string in cwd" },
+			{ "<leader>fc", "<cmd>Telescope grep_string<cr>", desc = "Find string under cursor in cwd" },
+			{ "<leader>bb", "<cmd>Telescope buffers<cr>",     desc = "Find buffer" },
+			{ "<leader>fh", "<cmd>Telescope help_tags<cr>",   desc = "Find help tag" },
 		},
 		config = function()
-			require("telescope").setup({
+			local telescope = require("telescope")
+			local actions = require("telescope.actions")
+
+			telescope.setup({
 				defaults = {
+					path_display = { "smart" },
 					mappings = {
 						i = {
-							["<C-h>"] = "which_key"
+							["<C-j>"] = actions.move_selection_next,
+							["<C-k>"] = actions.move_selection_previous,
+							["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
 						},
 						n = {
 							q = "close"
 						}
 					}
-				}
+				},
+				pickers = {
+					colorscheme = {
+						enable_preview = true,
+					}
+				},
 			})
+
+			-- Use the native fzf sorter.
+			telescope.load_extension("fzf")
 		end
 	},
 	{

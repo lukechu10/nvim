@@ -35,11 +35,17 @@ require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
 		{ import = "plugins.extras.lang" }
-	}
+	},
+	ui = {
+		border = "rounded",
+	},
+	change_detection = {
+		notify = false,
+	},
 })
 
 vim.o.background = "dark"
-vim.cmd [[colorscheme gruvbox]]
+vim.cmd [[colorscheme catppuccin-mocha]]
 
 vim.cmd [[set tabstop=4]]
 vim.cmd [[set shiftwidth=4]]

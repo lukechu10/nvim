@@ -35,6 +35,19 @@ return {
 			require("neodev").setup {}
 			local lspconfig = require("lspconfig")
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local servers = {
+				"clangd",
+				"pyright",
+				"tsserver", "tailwindcss", "cssls", "html",
+				"texlab",
+				"taplo", "jsonls",
+			}
+			for _, lsp in ipairs(servers) do
+				lspconfig[lsp].setup {
+					on_attach = on_attach,
+					capabilities = capabilities
+				}
+			end
 			lspconfig.lua_ls.setup {
 				settings = {
 					Lua = {
@@ -58,16 +71,6 @@ return {
 				on_attach = on_attach,
 				capabilities = capabilities,
 			}
-			local servers = {
-				"clangd", "pyright", "jsonls", "taplo",
-				"tsserver", "tailwindcss", "cssls", "html"
-			}
-			for _, lsp in ipairs(servers) do
-				lspconfig[lsp].setup {
-					on_attach = on_attach,
-					capabilities = capabilities
-				}
-			end
 
 			local border = {
 				{ "╭", "FloatBorder" },
@@ -109,8 +112,15 @@ return {
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup {
-				ensure_installed = { "lua_ls", "rust_analyzer", "pyright", "taplo", "jsonls",
-					"tsserver", "tailwindcss", "cssls", "html" }
+				ensure_installed = {
+					"lua_ls",
+					"clangd",
+					"rust_analyzer",
+					"pyright",
+					"tsserver", "tailwindcss", "cssls", "html",
+					"texlab",
+					"taplo", "jsonls",
+				}
 			}
 			require("mason-lspconfig").setup_handlers {
 				["rust_analyzer"] = function() end, -- Avoid conflict with rustaceanvim
