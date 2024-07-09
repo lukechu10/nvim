@@ -7,13 +7,6 @@ return {
 		end
 	},
 	{
-		"echasnovski/mini.comment",
-		event = "VeryLazy",
-		config = function()
-			require("mini.comment").setup()
-		end
-	},
-	{
 		"ggandor/leap.nvim",
 		event = "VeryLazy",
 		config = function()
