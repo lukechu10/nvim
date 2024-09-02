@@ -1,7 +1,10 @@
 return {
 	"folke/persistence.nvim",
 	event = "BufReadPre",
-	opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" } },
+	config = function()
+		vim.o.sessionoptions = "buffers,curdir,tabpages,terminal,winsize,help,globals"
+		require("persistence").setup()
+	end,
 	keys = {
 		{
 			"<leader>qs",
