@@ -6,9 +6,6 @@ return {
 		vim.o.timeoutlen = 300
 		local wk = require("which-key")
 
-		wk.setup({
-			defer = { gc = "Comments" },
-		})
 		wk.add({
 			{ "<leader><tab>",  group = "tabs" },
 			{ "<leader><tab>,", "<cmd>tabprevious<cr>", desc = "Previous" },
@@ -109,6 +106,7 @@ return {
 				if vim.bo.filetype ~= "lazygit" then
 					vim.keymap.set("t", "jj", "<C-\\><C-n>", { buffer = true })
 					vim.keymap.set("t", "jk", "<C-\\><C-n>", { buffer = true })
+
 					vim.keymap.set("t", "kj", "<C-\\><C-n>", { buffer = true })
 					vim.keymap.set("t", "kk", "<C-\\><C-n>", { buffer = true })
 				end
