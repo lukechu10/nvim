@@ -7,76 +7,92 @@ return {
 		local wk = require("which-key")
 
 		wk.setup({
-			operators = { gc = "Comments" },
+			defer = { gc = "Comments" },
 		})
-		wk.register({
-			["<leader>"] = {
-				b = {
-					name = "+buffers",
-					n = { "<cmd>enew<cr>", "New buffer in fullscreen" },
-					h = { "<cmd>new<cr>", "New buffer with horizontal split" },
-					v = { "<cmd>vnew<cr>", "New buffer with vertical split" },
-					[","] = { "<cmd>bprev<cr>", "Previous" },
-					["."] = { "<cmd>bnext<cr>", "Next" },
-					d = { "<cmd>bdelete<cr>", "Delete buffer" },
-					f = { "<cmd>bfirst<cr>", "First" },
-					l = { "<cmd>blast<cr>", "Last" }
-				},
-				c = {
-					name = "+code",
-				},
-				f = {
-					name = "+find",
-				},
-				q = { name = "+session" },
-				t = {
-					name = "+terminal",
-					n = { "<cmd>terminal<cr>", "New terminal in fullscreen" },
-					h = { "<cmd>split<cr><C-w>j<cmd>terminal<cr>",
-						"New terminal with horizontal split" },
-					v = { "<cmd>vsplit<cr><C-w>l<cmd>terminal<cr>",
-						"New terminal with vertical split" }
-				},
-				v = {
-					name = "+vimrc",
-					s = { "<cmd>source $MYVIMRC<cr>", "Source $MYVIMRC" },
-					e = { "<cmd>edit $MYVIMRC<cr>", "Edit $MYVIMRC" }
-				},
-				z = { "<cmd>:Lazy<cr>", "Plugin manager" },
-				C = {
-					name = "+colorscheme",
-					g = { "<cmd>set background=dark<cr><cmd>colorscheme gruvbox<cr>", "Gruvbox" },
-					t = { "<cmd>set background=dark<cr><cmd>colorscheme tokyonight<cr>", "Tokyo Night" },
-					s = { "<cmd>set background=light<cr><cmd>colorscheme solarized<cr>", "Solarized (Light)" },
-					-- Solarized light theme with transparent background.
-					S = { "<cmd>set background=light<cr><cmd>colorscheme solarized<cr><cmd>hi Normal guibg=NONE ctermbg=NONE<cr>", "Solarized (Light, Transparent)" },
-					l = { "<cmd>colorscheme catppuccin-latte<cr>", "Catppuccino Latte" },
-					-- Catppuccin Latte theme with transparent background.
-					L = { "<cmd>colorscheme catppuccin-latte<cr><cmd>hi Normal guibg=NONE ctermbg=NONE<cr>", "Catppuccin Latte (Transparent)" },
-				},
-				["<tab>"] = {
-					name = "+tabs",
-					n = { "<cmd>tabnew<cr>", "New tab" },
-					[","] = { "<cmd>tabprevious<cr>", "Previous" },
-					["."] = { "<cmd>tabnext<cr>", "Next" },
-					d = { "<cmd>tabclose<cr>", "Close" },
-					f = { "<cmd>tabfirst<cr>", "First" },
-					l = { "<cmd>tablast<cr>", "Last" }
-				},
+		wk.add({
+			{ "<leader><tab>",  group = "tabs" },
+			{ "<leader><tab>,", "<cmd>tabprevious<cr>", desc = "Previous" },
+			{ "<leader><tab>.", "<cmd>tabnext<cr>",     desc = "Next" },
+			{ "<leader><tab>d", "<cmd>tabclose<cr>",    desc = "Close" },
+			{ "<leader><tab>f", "<cmd>tabfirst<cr>",    desc = "First" },
+			{ "<leader><tab>l", "<cmd>tablast<cr>",     desc = "Last" },
+			{ "<leader><tab>n", "<cmd>tabnew<cr>",      desc = "New tab" },
+			{ "<leader>C",      group = "colorscheme" },
+			{
+				"<leader>CL",
+				"<cmd>colorscheme catppuccin-latte<cr><cmd>hi Normal guibg=NONE ctermbg=NONE<cr>",
+				desc = "Catppuccin Latte (Transparent)"
 			},
-			["g"] = { name = "+goto" },
-			H = { "<cmd>bprev<cr>", "Go to previous buffer" },
-			L = { "<cmd>bnext<cr>", "Go to next buffer" }
+			{
+				"<leader>CS",
+				"<cmd>set background=light<cr><cmd>colorscheme solarized<cr><cmd>hi Normal guibg=NONE ctermbg=NONE<cr>",
+				desc = "Solarized (Light, Transparent)"
+			},
+			{
+				"<leader>Cg",
+				"<cmd>set background=dark<cr><cmd>colorscheme gruvbox<cr>",
+				desc = "Gruvbox"
+			},
+			{
+				"<leader>Cl",
+				"<cmd>colorscheme catppuccin-latte<cr>",
+				desc = "Catppuccino Latte"
+			},
+			{
+				"<leader>Cs",
+				"<cmd>set background=light<cr><cmd>colorscheme solarized<cr>",
+				desc = "Solarized (Light)"
+			},
+			{
+				"<leader>Ct",
+				"<cmd>set background=dark<cr><cmd>colorscheme tokyonight<cr>",
+				desc = "Tokyo Night"
+			},
+			{ "<leader>b",  group = "buffers" },
+			{ "<leader>b,", "<cmd>bprev<cr>",   desc = "Previous" },
+			{ "<leader>b.", "<cmd>bnext<cr>",   desc = "Next" },
+			{ "<leader>bd", "<cmd>bdelete<cr>", desc = "Delete buffer" },
+			{ "<leader>bf", "<cmd>bfirst<cr>",  desc = "First" },
+			{ "<leader>bh", "<cmd>new<cr>",     desc = "New buffer with horizontal split" },
+			{ "<leader>bl", "<cmd>blast<cr>",   desc = "Last" },
+			{ "<leader>bn", "<cmd>enew<cr>",    desc = "New buffer in fullscreen" },
+			{ "<leader>bv", "<cmd>vnew<cr>",    desc = "New buffer with vertical split" },
+			{ "<leader>c",  group = "code" },
+			{ "<leader>f",  group = "find" },
+			{ "<leader>q",  group = "session" },
+			{ "<leader>t",  group = "terminal" },
+			{
+				"<leader>th",
+				"<cmd>split<cr><C-w>j<cmd>terminal<cr>",
+				desc = "New terminal with horizontal split"
+			},
+			{
+				"<leader>tn",
+				"<cmd>terminal<cr>",
+				desc = "New terminal in fullscreen"
+			},
+			{
+				"<leader>tv",
+				"<cmd>vsplit<cr><C-w>l<cmd>terminal<cr>",
+				desc = "New terminal with vertical split"
+			},
+			{ "<leader>v",  group = "vimrc" },
+			{ "<leader>ve", "<cmd>edit $MYVIMRC<cr>",   desc = "Edit $MYVIMRC" },
+			{ "<leader>vs", "<cmd>source $MYVIMRC<cr>", desc = "Source $MYVIMRC" },
+			{ "<leader>z",  "<cmd>:Lazy<cr>",           desc = "Plugin manager" },
+			{ "H",          "<cmd>bprev<cr>",           desc = "Go to previous buffer" },
+			{ "L",          "<cmd>bnext<cr>",           desc = "Go to next buffer" },
+			{ "g",          group = "goto" },
 		})
 
 		local go_to_buffer_keymap = {
-			["<C-h>"] = { "<C-w>h", "Go to buffer on the left" },
-			["<C-j>"] = { "<C-w>j", "Go to buffer below" },
-			["<C-k>"] = { "<C-w>k", "Go to buffer above" },
-			["<C-l>"] = { "<C-w>l", "Go to buffer on the right" }
+			{ "<C-h>", "<C-w>h", desc = "Go to buffer on the left" },
+			{ "<C-j>", "<C-w>j", desc = "Go to buffer below" },
+			{ "<C-k>", "<C-w>k", desc = "Go to buffer above" },
+			{ "<C-l>", "<C-w>l", desc = "Go to buffer on the right" }
 		}
-		wk.register(go_to_buffer_keymap, { mode = "n", noremap = false })
-		wk.register(go_to_buffer_keymap, { mode = "v", noremap = false })
+		wk.add(go_to_buffer_keymap, { mode = "n", noremap = false })
+		wk.add(go_to_buffer_keymap, { mode = "v", noremap = false })
 
 		-- Remap <cr> to clear search highlights
 		vim.keymap.set("n", "<cr>", ":noh<cr><cr>",

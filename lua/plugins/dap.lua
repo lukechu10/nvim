@@ -5,35 +5,26 @@ return {
 		dependencies = { "nvim-neotest/nvim-nio" },
 		config = function()
 			local wk = require("which-key")
-			wk.register({
-				["<leader>"] = {
-					d = {
-						name = "debug",
-						s = {
-							name = "step",
-							c = { "<cmd>lua require('dap').continue()<CR>", "Continue" },
-							v = { "<cmd>lua require('dap').step_over()<CR>", "Step Over" },
-							i = { "<cmd>lua require('dap').step_into()<CR>", "Step Into" },
-							o = { "<cmd>lua require('dap').step_out()<CR>", "Step Out" },
-						},
-						b = {
-							name = "breakpoints",
-							t = { "<cmd>lua require('dap').toggle_breakpoint()<CR>", "Toggle Breakpoint" },
-							c = { "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
-								"Set Conditional Breakpoint" },
-							m = {
-								"<cmd>lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
-								"Set Log Point" },
-						}
-					}
-				},
-				["<F5>"] = { "<cmd>lua require('dap').continue()<CR>", "Continue" },
-				["<F17>"] = { "<cmd>lua require('dap').close()<CR>", "Continue" },
-				["<F9>"] = { "<cmd>lua require('dap').toggle_breakpoint()<CR>", "Toggle Breakpoint" },
-				["<F11>"] = { "<cmd>lua require('dap').step_into()<CR>", "Step Into" },
-				["<F23>"] = { "<cmd>lua require('dap').step_out()<CR>", "Step Out" },
-				["<F10>"] = { "<cmd>lua require('dap').step_over()<CR>", "Step Over" },
-			})
+			wk.add(
+				{
+					{ "<F10>",       "<cmd>lua require('dap').step_over()<CR>",                                                   desc = "Step Over" },
+					{ "<F11>",       "<cmd>lua require('dap').step_into()<CR>",                                                   desc = "Step Into" },
+					{ "<F17>",       "<cmd>lua require('dap').close()<CR>",                                                       desc = "Continue" },
+					{ "<F23>",       "<cmd>lua require('dap').step_out()<CR>",                                                    desc = "Step Out" },
+					{ "<F5>",        "<cmd>lua require('dap').continue()<CR>",                                                    desc = "Continue" },
+					{ "<F9>",        "<cmd>lua require('dap').toggle_breakpoint()<CR>",                                           desc = "Toggle Breakpoint" },
+					{ "<leader>d",   group = "debug" },
+					{ "<leader>db",  group = "breakpoints" },
+					{ "<leader>dbc", "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",        desc = "Set Conditional Breakpoint" },
+					{ "<leader>dbm", "<cmd>lua require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", desc = "Set Log Point" },
+					{ "<leader>dbt", "<cmd>lua require('dap').toggle_breakpoint()<CR>",                                           desc = "Toggle Breakpoint" },
+					{ "<leader>ds",  group = "step" },
+					{ "<leader>dsc", "<cmd>lua require('dap').continue()<CR>",                                                    desc = "Continue" },
+					{ "<leader>dsi", "<cmd>lua require('dap').step_into()<CR>",                                                   desc = "Step Into" },
+					{ "<leader>dso", "<cmd>lua require('dap').step_out()<CR>",                                                    desc = "Step Out" },
+					{ "<leader>dsv", "<cmd>lua require('dap').step_over()<CR>",                                                   desc = "Step Over" },
+				}
+			)
 
 			local dap = require("dap")
 
