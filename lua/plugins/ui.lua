@@ -1,3 +1,21 @@
+-- Credit: https://github.com/nvim-telescope/telescope.nvim/issues/2014#issuecomment-1873229658
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "TelescopeResults",
+	callback = function(ctx)
+		vim.api.nvim_buf_call(ctx.buf, function()
+			vim.fn.matchadd("TelescopeParent", "\t\t.*$")
+			vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
+		end)
+	end,
+})
+
+local function filename_first(_, path)
+	local tail = vim.fs.basename(path)
+	local parent = vim.fs.dirname(path)
+	if parent == "." then return tail end
+	return string.format("%s\t\t%s", tail, parent)
+end
+
 return {
 	{
 		"nvim-telescope/telescope.nvim",
@@ -20,7 +38,6 @@ return {
 
 			telescope.setup({
 				defaults = {
-					path_display = { "smart" },
 					mappings = {
 						i = {
 							["<C-j>"] = actions.move_selection_next,
@@ -30,12 +47,13 @@ return {
 						n = {
 							q = "close"
 						}
-					}
+					},
+					path_display = filename_first,
 				},
 				pickers = {
 					colorscheme = {
 						enable_preview = true,
-					}
+					},
 				},
 			})
 

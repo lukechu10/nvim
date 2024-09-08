@@ -15,9 +15,9 @@ local function on_attach(client, bufnr)
 	vim.keymap.set("n", "<leader>fw", tl.lsp_workspace_symbols, { desc = "Find workspace symbol" })
 	vim.keymap.set("n", "<leader>fd", tl.lsp_document_symbols, { desc = "Find document symbol" })
 
-	if client.server_capabilities.inlayHintProvider then
-		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-	end
+	-- if client.server_capabilities.inlayHintProvider then
+	-- 	vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+	-- end
 end
 
 
@@ -120,7 +120,8 @@ return {
 	},
 	{
 		"mrcjkb/rustaceanvim",
-		version = "^4",
+		version = "^5",
+		lazy = false,
 		ft = { "rust" },
 		config = function()
 			vim.g.rustaceanvim = {
