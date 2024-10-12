@@ -95,11 +95,10 @@ return {
 		vim.keymap.set("n", "<cr>", ":noh<cr><cr>",
 			{ noremap = true, silent = true, desc = "Clear search highlights" })
 
-		-- Remap jj, jk, kj, kk to <Esc> in insert and terminal mode
+		-- Remap jj, jk to <Esc> in insert and terminal mode
+		-- Words ending with j are relatively rare so this should be good enough for most cases.
 		vim.keymap.set("i", "jj", "<Esc>")
 		vim.keymap.set("i", "jk", "<Esc>")
-		vim.keymap.set("i", "kj", "<Esc>")
-		vim.keymap.set("i", "kk", "<Esc>")
 		vim.api.nvim_create_autocmd("TermOpen", {
 			callback = function()
 				print(vim.bo.filetype)

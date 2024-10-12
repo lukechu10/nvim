@@ -46,7 +46,7 @@ return {
 			local servers = {
 				"clangd",
 				"pyright",
-				"tsserver", "tailwindcss", "cssls", "html",
+				"tsserver", "cssls", "html",
 				"texlab",
 				"taplo", "jsonls",
 				"lua_ls",
