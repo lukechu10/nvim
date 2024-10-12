@@ -46,7 +46,7 @@ return {
 			local servers = {
 				"clangd",
 				"pyright",
-				"tsserver", "cssls", "html",
+				"ts_ls", "cssls", "html",
 				"texlab",
 				"taplo", "jsonls",
 				"lua_ls",
@@ -103,7 +103,7 @@ return {
 					"clangd",
 					"rust_analyzer",
 					"pyright",
-					"tsserver", "tailwindcss", "cssls", "html",
+					"ts_ls", "tailwindcss", "cssls", "html",
 					"texlab",
 					"taplo", "jsonls",
 				}
