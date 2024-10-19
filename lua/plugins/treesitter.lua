@@ -8,7 +8,7 @@ return {
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = { "lua", "rust", "toml", "json", "jsonc", "javascript", "typescript",
-					"css", "html", "bash", "python", "vimdoc", "vim" }
+					"css", "html", "bash", "python", "vimdoc", "vim" },
 			})
 		end
 	},
@@ -31,6 +31,14 @@ return {
 
 							["aa"] = "@parameter.outer",
 							["ia"] = "@parameter.inner",
+
+							["il"] = "@loop.inner",
+							["al"] = "@loop.outer",
+
+							["a="] = "@assignment.outer",
+							["i="] = "@assignment.inner",
+							["l="] = "@assignment.lhs",
+							["r="] = "@assignment.rhs",
 						},
 					},
 					swap = {
@@ -60,6 +68,24 @@ return {
 					},
 					include_surrounding_whitespace = true,
 				}
+			})
+		end
+	},
+	{
+		"RRethy/nvim-treesitter-textsubjects",
+		event = { "BufReadPost", "BufNewFile" },
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				textsubjects = {
+					enable = true,
+					prev_selection = ',',
+					keymaps = {
+						['<cr>'] = 'textsubjects-smart',
+						['\''] = 'textsubjects-container-outer',
+						['i\''] = { 'textsubjects-container-inner', desc = "Select inside containers (classes, functions, etc.)" },
+					},
+				},
 			})
 		end
 	}
