@@ -458,7 +458,6 @@ return {
 	sm({ trig = "OO", name = "Empty Set" }, { t("emptyset ") }),
 
 	-- Miscellaneous
-	sm({ trig = "...", name = "ldots", priority = 100 }, { t("#sym.dots.h") }),
 	sm({ trig = "tt", name = "Text" }, fmt([["{}" {}]], { i(1, "text here"), i(0) })),
 
 	-- ----------------------------------------------------------------------------
@@ -473,7 +472,7 @@ return {
 		{ trig = "mb", name = "Insert block math" },
 		fmt(
 			[[
-    $ {}. $
+    $ {} . $
 
     {}]],
 			{ i(1), i(0) }
@@ -575,16 +574,6 @@ return {
 	),
 
 	sm({ trig = "xx", name = "Cross Product" }, { t("times ") }),
-	sm({ trig = "..", name = "Dot Product", priority = 100 }, { t("dot ") }),
-
-	-- Wraps/Surrounds
-	-- sm({ trig = "upr", name = "Upright variant for single letters" }, fmt([[upright({}){}]], { d(1, get_visual), i(0) }) ),
-	postfixm({ trig = ".up", name = "Upright variant for single letters" }, { l("upright(" .. l.POSTFIX_MATCH .. ") ") }),
-	sm({ trig = "cl", name = "Ceiling function" }, fmt([[ceil({}) {}]], { d(1, get_visual), i(0) })),
-	sm({ trig = "fl", name = "Floor function" }, fmt([[floor({}) {}]], { d(1, get_visual), i(0) })),
-	sm({ trig = "abs", name = "Absolute value" }, fmt([[abs({}) {}]], { d(1, get_visual), i(0) })),
-	sm({ trig = "rnd", name = "Round-up function" }, fmt([[round({}) {}]], { d(1, get_visual), i(0) })),
-	sm({ trig = "norm", name = "Norm function" }, fmt([[norm({}) {}]], { d(1, get_visual), i(0) })),
 
 	-- Matrices
 	sm({ trig = "pmat", name = "() Matrix" }, fmt([[mat(delim: "(", {}) {}]], { d(1, get_visual), i(0) })),
@@ -599,7 +588,7 @@ return {
 	-- Decorators: Over/Under
 	sm({ trig = "hbar", name = "hbar" }, { t("planck.reduce") }),
 	sm(
-		{ trig = "(%a)bar", name = "Letter bars", regTrig = true },
+		{ trig = "(%a+)%.bar", name = "Letter bars", regTrig = true },
 		fmt([[overline({}) ]], {
 			f(function(_, snip)
 				return snip.captures[1]
@@ -608,8 +597,8 @@ return {
 	),
 
 	sm(
-		{ trig = "(%a)hat", name = "Letter hats", regTrig = true },
-		fmt([[hat({}) ]], {
+		{ trig = "(%a+)%.hat", name = "Letter hats", regTrig = true },
+		fmt([[hat({})]], {
 			f(function(_, snip)
 				return snip.captures[1]
 			end)
