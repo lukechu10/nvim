@@ -48,6 +48,7 @@ return {
 				"pyright",
 				"ts_ls", "cssls", "html",
 				"texlab",
+				"tinymist",
 				"taplo", "jsonls",
 				"lua_ls",
 			}
@@ -105,6 +106,7 @@ return {
 					"pyright",
 					"ts_ls", "tailwindcss", "cssls", "html",
 					"texlab",
+					"tinymist",
 					"taplo", "jsonls",
 				}
 			}

@@ -57,19 +57,19 @@ return {
 			{ "<leader>c",  group = "code" },
 			{ "<leader>f",  group = "find" },
 			{ "<leader>q",  group = "session" },
-			{ "<leader>t",  group = "terminal" },
+			{ "<leader>T",  group = "terminal" },
 			{
-				"<leader>th",
+				"<leader>Th",
 				"<cmd>split<cr><C-w>j<cmd>terminal<cr>",
 				desc = "New terminal with horizontal split"
 			},
 			{
-				"<leader>tn",
+				"<leader>Tn",
 				"<cmd>terminal<cr>",
 				desc = "New terminal in fullscreen"
 			},
 			{
-				"<leader>tv",
+				"<leader>Tv",
 				"<cmd>vsplit<cr><C-w>l<cmd>terminal<cr>",
 				desc = "New terminal with vertical split"
 			},
