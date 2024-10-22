@@ -7,8 +7,15 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "lua", "rust", "toml", "json", "jsonc", "javascript", "typescript",
-					"css", "html", "bash", "python", "vimdoc", "vim" },
+				ensure_installed = {
+					"c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline",
+					"rust", "toml", "json", "jsonc", "javascript", "typescript",
+					"css", "html", "bash", "python", "typst"
+				},
+				highlight = {
+					enable = true,
+					disable = { "rust" },
+				},
 			})
 		end
 	},
