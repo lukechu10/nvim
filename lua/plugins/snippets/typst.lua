@@ -470,10 +470,10 @@ return {
 
 	-- -------------- TEXT snippets ---------------
 	s(
-		{ trig = "dm", name = "Insert block math" },
+		{ trig = "mb", name = "Insert block math" },
 		fmt(
 			[[
-    $ {} $
+    $ {}. $
 
     {}]],
 			{ i(1), i(0) }
@@ -481,7 +481,7 @@ return {
 	),
 
 	s(
-		{ trig = "mk", name = "Insert inline math" },
+		{ trig = "mm", name = "Insert inline math" },
 		fmt([[${}${}{} ]], {
 			i(1),
 			f(function(args, snip)
@@ -591,10 +591,10 @@ return {
 	sm({ trig = "bmat", name = "[] Matrix" }, fmt([[mat(delim: "[", {}) {}]], { d(1, get_visual), i(0) })),
 
 	-- Derivatives
-	sm({ trig = "ddx", name = "d/dx Total Derivative" }, fmt([[(d {})/(d x) {}]], { i(1, "y"), i(0) })),
-	sm({ trig = "pdx", name = "d/dx Partial Derivative" }, fmt([[(diff {})/(diff x) {}]], { i(1, "y"), i(0) })),
-	sm({ trig = "ddt", name = "d/dt Total Derivative" }, fmt([[(d {})/(d t) {}]], { i(1, "y"), i(0) })),
-	sm({ trig = "pdt", name = "d/dt Partial Derivative" }, fmt([[(diff {})/(diff t) {}]], { i(1, "y"), i(0) })),
+	sm({ trig = "ddx", name = "d/dx Total Derivative" }, fmt([[dv({}, x) {}]], { i(1, "y"), i(0) })),
+	sm({ trig = "pdx", name = "d/dx Partial Derivative" }, fmt([[pdv({}, x) {}]], { i(1, "y"), i(0) })),
+	sm({ trig = "ddt", name = "d/dt Total Derivative" }, fmt([[dv({}, t){}]], { i(1, "y"), i(0) })),
+	sm({ trig = "pdt", name = "d/dt Partial Derivative" }, fmt([[pdv({}, t) {}]], { i(1, "y"), i(0) })),
 
 	-- Decorators: Over/Under
 	sm({ trig = "hbar", name = "hbar" }, { t("planck.reduce") }),
@@ -616,21 +616,13 @@ return {
 		})
 	),
 
+	-- Quantum Mechanics snippets
 	sm(
-		{ trig = "(%a),.", name = "Vectors", regTrig = true },
-		fmt([[arrow({}) ]], {
+		{ trig = "(%a)%.%+", name = "Hermitian conjugate", regTrig = true },
+		fmt([[ {}^+ ]], {
 			f(function(_, snip)
 				return snip.captures[1]
 			end)
 		})
-	),
-
-	sm(
-		{ trig = "(%a).,", name = "Vectors", regTrig = true },
-		fmt([[arrow({}) ]], {
-			f(function(_, snip)
-				return snip.captures[1]
-			end)
-		})
-	),
+	)
 }

@@ -2,9 +2,10 @@ return {
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
-		config = function()
-			require("nvim-autopairs").setup()
-		end
+		config = true,
+		opts = {
+			ignored_next_char = [=[[%w%%%'%[%"%`]]=],
+		}
 	},
 	{
 		"ggandor/leap.nvim",
@@ -154,6 +155,13 @@ return {
 		"L3MON4D3/LuaSnip",
 		event = "VeryLazy",
 		build = "make install_jsregexp",
+		keys = {
+			{
+				"<leader>L",
+				function() require("luasnip.loaders.from_lua").load({ paths = "./lua/plugins/snippets" }) end,
+				desc = "Reload snippets"
+			}
+		},
 		config = function()
 			local ls = require('luasnip')
 
@@ -169,7 +177,7 @@ return {
 	{
 		"sindrets/diffview.nvim",
 		event = "VeryLazy",
-		dependencies = { "nvim-lua/plenary.nvim" }
+		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 
 	{

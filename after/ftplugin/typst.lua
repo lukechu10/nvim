@@ -6,3 +6,5 @@ vim.opt_local.spelllang = "en_gb"
 
 -- <C-l> to quickly fix spelling
 vim.cmd [[inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u]]
+
+vim.opt_local.commentstring = "// %s"

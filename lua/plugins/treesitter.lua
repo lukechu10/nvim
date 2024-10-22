@@ -44,7 +44,6 @@ return {
 
 							["a="] = "@assignment.outer",
 							["i="] = "@assignment.inner",
-							["l="] = "@assignment.lhs",
 							["r="] = "@assignment.rhs",
 						},
 					},

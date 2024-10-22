@@ -113,5 +113,5 @@ vim.cmd [[
 vim.cmd [[ set modeline ]]
 
 -- Redefine j and k to be more intuitive for soft-wrapped lines.
-vim.keymap.set({ "n", "v" }, "j", "gj")
-vim.keymap.set({ "n", "v" }, "k", "gk")
+vim.keymap.set({ "n", "x" }, "j", "gj")
+vim.keymap.set({ "n", "x" }, "k", "gk")
