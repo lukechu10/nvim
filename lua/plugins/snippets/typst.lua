@@ -44,21 +44,38 @@ end
 -- ----------------------------------------------------------------------------
 
 -- Typst detection functions
-local function in_markup()
-	return vim.api.nvim_eval("typst#in_markup()") == 1
+local function in_node(type)
+	-- Use the Neovim Treesitter to check if we are inside a @math node.
+	local bufnr = vim.api.nvim_get_current_buf()
+	local cursor = vim.api.nvim_win_get_cursor(0)
+
+	local root = vim.treesitter.get_parser(bufnr):parse({ cursor[1] - 1, cursor[2] })[1]:root()
+	local query = vim.treesitter.query.get("typst", "typst_modes");
+
+	for id, node in query:iter_captures(root, 0) do
+		if node:type() == type and vim.treesitter.is_in_node_range(node, cursor[1] - 1, cursor[2]) then
+			return true
+		end
+	end
+	return false
 end
 
 local function in_math()
-	-- return vim.api.nvim_eval("typst#in_math()") == 1
+	return in_node("math")
 end
 
 local function in_code()
-	return vim.api.nvim_eval("typst#in_code()") == 1
+	return in_node("raw_blck")
 end
 
 local function in_comment()
-	return vim.api.nvim_eval("typst#in_comment()") == 1
+	return in_node("comment")
 end
+
+local function in_markup()
+	return not in_math() and not in_code() and not in_comment()
+end
+
 
 -- Function that returns either a space or an empty string based on the input.
 local function space_conditional(args)
