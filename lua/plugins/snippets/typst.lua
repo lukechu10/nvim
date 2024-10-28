@@ -586,7 +586,6 @@ return {
 	sm({ trig = "pdt", name = "d/dt Partial Derivative" }, fmt([[pdv({}, t) {}]], { i(1, "y"), i(0) })),
 
 	-- Decorators: Over/Under
-	sm({ trig = "hbar", name = "hbar" }, { t("planck.reduce") }),
 	sm(
 		{ trig = "(%a+)%.bar", name = "Letter bars", regTrig = true },
 		fmt([[overline({}) ]], {
