@@ -481,7 +481,7 @@ return {
 
 	s(
 		{ trig = "mm", name = "Insert inline math" },
-		fmt([[${}${}{} ]], {
+		fmt([[${}${}{}]], {
 			i(1),
 			f(function(args, snip)
 				if args[1][1] and not string.match(args[1][1], "^[%.,%?%- ]") then

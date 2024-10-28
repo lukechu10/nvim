@@ -11,7 +11,7 @@ end
 -- Check if current buffer is one of text,md,markdown,tex.
 local function isTextBuffer()
 	local ft = vim.bo.filetype
-	return ft == "text" or ft == "md" or ft == "markdown" or ft == "tex"
+	return ft == "text" or ft == "md" or ft == "markdown" or ft == "tex" or ft == "typst"
 end
 
 return {
