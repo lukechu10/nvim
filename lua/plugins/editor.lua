@@ -190,5 +190,20 @@ return {
 				}
 			})
 		end
+	},
+
+	{
+		"folke/zen-mode.nvim",
+		opts = {
+			width = 100,
+			height = 1,
+		},
+		keys = {
+			{
+				"<leader>Z",
+				"<cmd>ZenMode<CR>",
+				desc = "Toggle Zen Mode",
+			}
+		}
 	}
 }
