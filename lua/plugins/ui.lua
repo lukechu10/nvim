@@ -226,5 +226,19 @@ return {
 	"folke/tokyonight.nvim",
 	"ellisonleao/gruvbox.nvim",
 	"maxmx03/solarized.nvim",
-	"catppuccin/nvim",
+	{
+		"catppuccin/nvim",
+		config = function()
+			require("catppuccin").setup({
+				integrations = {
+					blink_cmp = true,
+					mason = true,
+					telescope = {
+						enabled = true,
+						style = "nvchad",
+					}
+				}
+			})
+		end
+	}
 }
