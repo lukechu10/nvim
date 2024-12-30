@@ -236,7 +236,9 @@ return {
 					telescope = {
 						enabled = true,
 						style = "nvchad",
-					}
+					},
+					lsp_trouble = true,
+					which_key = true,
 				}
 			})
 		end
