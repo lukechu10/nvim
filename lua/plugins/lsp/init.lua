@@ -37,12 +37,11 @@ return {
 	{ "Bilal2453/luvit-meta", lazy = true },
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { "folke/neoconf.nvim" },
+		dependencies = { "folke/neoconf.nvim", "saghen/blink.cmp" },
 		event = "VeryLazy",
 		config = function()
 			require("neoconf").setup {}
 			local lspconfig = require("lspconfig")
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local servers = {
 				"clangd",
 				"pyright",
@@ -55,7 +54,7 @@ return {
 			for _, lsp in ipairs(servers) do
 				lspconfig[lsp].setup {
 					on_attach = on_attach,
-					capabilities = capabilities
+					capabilities = require("blink.cmp").get_lsp_capabilities(),
 				}
 			end
 
