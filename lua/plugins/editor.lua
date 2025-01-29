@@ -23,7 +23,7 @@ return {
 
 	{
 		"saghen/blink.cmp",
-		version = "0.8.2",
+		version = "*",
 		opts = {
 			keymap = {
 				preset = "super-tab",
@@ -37,7 +37,7 @@ return {
 				documentation = { auto_show = true },
 				ghost_text = { enabled = true },
 			},
-			signature = { enabled = true }
+			signature = { enabled = true },
 		},
 		opts_extend = { "sources.default" }
 	},
