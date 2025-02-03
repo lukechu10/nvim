@@ -23,8 +23,10 @@ return {
 
 	{
 		"saghen/blink.cmp",
+		dependencies = { "L3MON4D3/LuaSnip", version = "v2.*" },
 		version = "*",
 		opts = {
+			snippets = { preset = "luasnip" },
 			keymap = {
 				preset = "super-tab",
 				["<C-j>"] = { "select_next", "fallback" },
