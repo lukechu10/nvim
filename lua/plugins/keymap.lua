@@ -101,7 +101,6 @@ return {
 		vim.keymap.set("i", "jk", "<Esc>")
 		vim.api.nvim_create_autocmd("TermOpen", {
 			callback = function()
-				Snacks.notify.warn(vim.bo.filetype)
 				if vim.bo.filetype ~= "lazygit" then
 					vim.keymap.set("t", "jj", "<C-\\><C-n>", { buffer = true })
 					vim.keymap.set("t", "jk", "<C-\\><C-n>", { buffer = true })

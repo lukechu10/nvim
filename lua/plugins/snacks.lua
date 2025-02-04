@@ -8,6 +8,10 @@ return {
 			enabled = true,
 			example = "doom",
 		},
+		explorer = {
+			enabled = true,
+			replace_netrw = true,
+		},
 		lazygit = {
 			enabled = true,
 			win = {
@@ -18,6 +22,7 @@ return {
 		},
 	},
 	keys = {
-		{ "<leader>g", function() Snacks.lazygit() end, desc = "Open lazygit" }
+		{ "<leader>g", function() Snacks.lazygit() end,       desc = "Open lazygit" },
+		{ "<A-h>",     function() Snacks.explorer.open() end, desc = "Open file explorer" },
 	}
 }
