@@ -179,40 +179,12 @@ return {
 		opts = {
 			indent = { char = "│" },
 			exclude = {
-				filetypes = { "help", "alpha", "dashboard", "lazy" },
+				filetypes = { "help", "dashboard", "lazy" },
 			},
 			scope = {
 				enabled = false,
 			},
 		},
-	},
-
-	{
-		"goolord/alpha-nvim",
-		config = function()
-			local dashboard = require("alpha.themes.dashboard")
-
-			dashboard.section.buttons.val = {
-				dashboard.button("f", "Find files", "\\ff"),
-				dashboard.button("g", "Find word", "\\fg"),
-				dashboard.button("s", "Load session", "\\qs"),
-				dashboard.button("v e", "Edit config", "\\ve"),
-				dashboard.button("z", "Plugin manager", ":Lazy<cr>"),
-			}
-
-			require("alpha").setup(dashboard.opts)
-
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "LazyVimStarted",
-				callback = function()
-					local stats = require("lazy").stats()
-					local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-					dashboard.section.footer.val = "⚡ Neovim loaded " ..
-						stats.count .. " plugins in " .. ms .. "ms"
-					pcall(vim.cmd.AlphaRedraw)
-				end,
-			})
-		end
 	},
 
 	{
