@@ -39,14 +39,4 @@ return {
 			extensions = { "nvim-tree" }
 		}
 	},
-
-	{
-		"akinsho/bufferline.nvim",
-		event = "VimEnter",
-		opts = {
-			options = {
-				diagnostics = "nvim_lsp"
-			}
-		}
-	},
 }
