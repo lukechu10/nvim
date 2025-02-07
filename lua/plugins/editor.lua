@@ -37,9 +37,9 @@ return {
 			},
 			completion = {
 				documentation = { auto_show = true },
-				ghost_text = { enabled = true },
+				ghost_text = { enabled = false },
 			},
-			signature = { enabled = true },
+			signature = { enabled = true }
 		},
 		opts_extend = { "sources.default" }
 	},
