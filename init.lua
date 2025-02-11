@@ -79,26 +79,22 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end
 })
 
-if vim.fn.has("wsl") == 1 then
-	if vim.fn.executable("wl-copy") == 0 then
-		print("wl-clipboard is not installed, clipboard integration will not work")
-	else
-		vim.g.clipboard = {
-			name = "wl-clipboard (WSL)",
-			copy = {
-				["+"] = "wl-copy --type text/plain",
-				["*"] = "wl-copy --type text/plain --primary"
-			},
-			paste = {
-				["+"] = function()
-					return vim.fn.systemlist('wl-paste --no-newline|sed -e \"s/\r\\$//\"', { '' }, 1) -- '1' keeps empty lines
-				end,
-				["*"] = function()
-					return vim.fn.systemlist('wl-paste --primary --no-newline|sed -e \"s/\r\\$//\"', { '' }, 1)
-				end,
-			}
+if vim.fn.executable("wl-copy") == 1 then
+	vim.g.clipboard = {
+		name = "wl-clipboard",
+		copy = {
+			["+"] = "wl-copy --type text/plain",
+			["*"] = "wl-copy --type text/plain --primary"
+		},
+		paste = {
+			["+"] = function()
+				return vim.fn.systemlist('wl-paste --no-newline|sed -e \"s/\r\\$//\"', { '' }, 1) -- '1' keeps empty lines
+			end,
+			["*"] = function()
+				return vim.fn.systemlist('wl-paste --primary --no-newline|sed -e \"s/\r\\$//\"', { '' }, 1)
+			end,
 		}
-	end
+	}
 end
 
 vim.cmd [[
