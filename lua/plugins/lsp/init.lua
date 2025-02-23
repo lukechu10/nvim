@@ -50,6 +50,7 @@ return {
 				"tinymist",
 				"taplo", "jsonls",
 				"lua_ls",
+				"harper_ls"
 			}
 			for _, lsp in ipairs(servers) do
 				lspconfig[lsp].setup {
@@ -107,6 +108,7 @@ return {
 					"texlab",
 					"tinymist",
 					"taplo", "jsonls",
+					"harper_ls"
 				}
 			}
 			require("mason-lspconfig").setup_handlers {
