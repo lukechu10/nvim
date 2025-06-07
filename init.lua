@@ -72,9 +72,12 @@ vim.cmd [[
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = vim.api.nvim_create_augroup("AutoFmt", { clear = true }),
 	callback = function()
-		local client = vim.lsp.get_clients()[1]
-		if client and client.supports_method("textDocument/formatting") then
-			vim.lsp.buf.format()
+		local clients = vim.lsp.get_clients()
+		for _, client in ipairs(clients) do
+			if client and client:supports_method("textDocument/formatting") then
+				vim.lsp.buf.format()
+				return
+			end
 		end
 	end
 })

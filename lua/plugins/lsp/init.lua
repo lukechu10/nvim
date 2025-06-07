@@ -1,4 +1,4 @@
-local function on_attach(client, bufnr)
+local function on_attach()
 	local tl = require("telescope.builtin")
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
 	vim.keymap.set("n", "gd", tl.lsp_definitions, { desc = "Go to definition" })
@@ -14,10 +14,6 @@ local function on_attach(client, bufnr)
 	vim.keymap.set("n", "gr", tl.lsp_references, { desc = "Show references" })
 	vim.keymap.set("n", "<leader>fw", tl.lsp_workspace_symbols, { desc = "Find workspace symbol" })
 	vim.keymap.set("n", "<leader>fd", tl.lsp_document_symbols, { desc = "Find document symbol" })
-
-	-- if client.server_capabilities.inlayHintProvider then
-	-- 	vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-	-- end
 end
 
 
@@ -41,24 +37,38 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("neoconf").setup {}
-			local lspconfig = require("lspconfig")
-			local servers = {
-				"clangd",
-				"pyright",
-				"ts_ls", "cssls", "html",
-				"texlab",
-				"tinymist",
-				"taplo", "jsonls",
+			-- local lspconfig = require("lspconfig")
+			-- local servers = {
+			-- 	"clangd",
+			-- 	"pyright",
+			-- 	"ts_ls", "cssls", "html",
+			-- 	"texlab",
+			-- 	"tinymist",
+			-- 	"taplo", "jsonls",
+			-- 	"lua_ls",
+			-- 	"harper_ls",
+			-- 	"nil_ls",
+			-- }
+			-- for _, lsp in ipairs(servers) do
+			-- 	lspconfig[lsp].setup {
+			-- 		on_attach = on_attach,
+			-- 		capabilities = require("blink.cmp").get_lsp_capabilities(),
+			-- 	}
+			-- end
+			--
+			vim.lsp.enable({
+				"harper_ls",
 				"lua_ls",
-				"harper_ls"
-			}
-			for _, lsp in ipairs(servers) do
-				lspconfig[lsp].setup {
-					on_attach = on_attach,
-					capabilities = require("blink.cmp").get_lsp_capabilities(),
-				}
-			end
+				"nil_ls"
+			})
 
+			vim.lsp.config("nil_ls", {
+				settings = {
+					["nil"] = {
+						formatting = { command = { "nixfmt" } }
+					}
+				}
+			})
 			local border = {
 				{ "╭", "FloatBorder" },
 				{ "─", "FloatBorder" },
@@ -76,6 +86,12 @@ return {
 				opts.border = opts.border or border
 				return orig_util_open_floating_preview(contents, syntax, opts, ...)
 			end
+
+			-- Set LSP Attach handler
+			vim.api.nvim_create_autocmd('LspAttach', {
+				group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
+				callback = on_attach,
+			})
 		end
 	},
 	{
@@ -98,19 +114,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("mason").setup()
-			require("mason-lspconfig").setup {
-				ensure_installed = {
-					"lua_ls",
-					"clangd",
-					"rust_analyzer",
-					"pyright",
-					"ts_ls", "tailwindcss", "cssls", "html",
-					"texlab",
-					"tinymist",
-					"taplo", "jsonls",
-					"harper_ls"
-				}
-			}
+			require("mason-lspconfig").setup()
 			require("mason-lspconfig").setup_handlers {
 				["rust_analyzer"] = function() end, -- Avoid conflict with rustaceanvim
 			}
