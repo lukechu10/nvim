@@ -115,9 +115,6 @@ return {
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup()
-			require("mason-lspconfig").setup_handlers {
-				["rust_analyzer"] = function() end, -- Avoid conflict with rustaceanvim
-			}
 		end
 	},
 	{
