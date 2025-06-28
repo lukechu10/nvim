@@ -59,7 +59,8 @@ return {
 			vim.lsp.enable({
 				"harper_ls",
 				"lua_ls",
-				"nil_ls"
+				"nil_ls",
+				"tinymist"
 			})
 
 			vim.lsp.config("nil_ls", {
