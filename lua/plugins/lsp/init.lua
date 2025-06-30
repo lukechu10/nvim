@@ -37,32 +37,6 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("neoconf").setup {}
-			-- local lspconfig = require("lspconfig")
-			-- local servers = {
-			-- 	"clangd",
-			-- 	"pyright",
-			-- 	"ts_ls", "cssls", "html",
-			-- 	"texlab",
-			-- 	"tinymist",
-			-- 	"taplo", "jsonls",
-			-- 	"lua_ls",
-			-- 	"harper_ls",
-			-- 	"nil_ls",
-			-- }
-			-- for _, lsp in ipairs(servers) do
-			-- 	lspconfig[lsp].setup {
-			-- 		on_attach = on_attach,
-			-- 		capabilities = require("blink.cmp").get_lsp_capabilities(),
-			-- 	}
-			-- end
-			--
-			vim.lsp.enable({
-				"harper_ls",
-				"lua_ls",
-				"nil_ls",
-				"tinymist"
-			})
-
 			vim.lsp.config("nil_ls", {
 				settings = {
 					["nil"] = {
@@ -70,6 +44,23 @@ return {
 					}
 				}
 			})
+
+			vim.lsp.enable({
+				"basedpyright",
+				"clangd",
+				"cssls",
+				"eslint",
+				"harper_ls",
+				"html",
+				"jsonls",
+				"lua_ls",
+				"nil_ls",
+				"tailwindcss",
+				"taplo",
+				"tinymist",
+				"ts_ls",
+			})
+
 			local border = {
 				{ "╭", "FloatBorder" },
 				{ "─", "FloatBorder" },
@@ -103,7 +94,6 @@ return {
 
 			null_ls.setup({
 				sources = {
-					null_ls.builtins.diagnostics.eslint,
 					null_ls.builtins.formatting.prettier,
 				}
 			})
