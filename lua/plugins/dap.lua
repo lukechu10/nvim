@@ -28,13 +28,18 @@ return {
 
 			local dap = require("dap")
 
+			-- First check if the dap is installed via Mason.
 			local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
-			local codelldb_path = mason_path .. "bin/codelldb"
 			local this_os = vim.loop.os_uname().sysname
-
-			-- The path in windows is different
 			if this_os:find "Windows" then
 				codelldb_path = mason_path .. "packages\\codelldb\\extension\\adapter\\codelldb.exe"
+			else
+				codelldb_path = mason_path .. "bin/codelldb"
+			end
+
+			if not vim.fn.filereadable(codelldb_path) then
+				-- TODO: Try to find codelldb from vscode extension.
+				print("codelldb not found at " .. codelldb_path)
 			end
 
 			dap.adapters.codelldb = {
