@@ -69,19 +69,6 @@ vim.cmd [[
 	augroup END
 ]]
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	group = vim.api.nvim_create_augroup("AutoFmt", { clear = true }),
-	callback = function()
-		local clients = vim.lsp.get_clients()
-		for _, client in ipairs(clients) do
-			if client and client:supports_method("textDocument/formatting") then
-				vim.lsp.buf.format()
-				return
-			end
-		end
-	end
-})
-
 if vim.fn.executable("wl-copy") == 1 then
 	vim.g.clipboard = {
 		name = "wl-clipboard",
