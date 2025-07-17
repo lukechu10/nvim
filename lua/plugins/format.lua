@@ -9,6 +9,8 @@ return {
 				typescript = { "prettierd", "prettier", stop_after_first = true },
 				javascriptreact = { "prettierd", "prettier", stop_after_first = true },
 				typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+				json = { "prettierd", "prettier", lsp_format = "none", stop_after_first = true },
+				jsonc = { "prettierd", "prettier", lsp_format = "none", stop_after_first = true },
 			},
 			default_format_opts = {
 				lsp_format = "fallback",
