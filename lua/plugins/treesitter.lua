@@ -9,7 +9,7 @@ return {
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = {
 					"c", "c_sharp", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline",
-					"rust", "toml", "json", "jsonc", "javascript", "typescript",
+					"rust", "toml", "json", "jsonc", "javascript", "typescript", "tsx",
 					"css", "html", "bash", "python", "typst"
 				},
 				highlight = {
@@ -81,18 +81,5 @@ return {
 		"RRethy/nvim-treesitter-textsubjects",
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				textsubjects = {
-					enable = true,
-					prev_selection = ',',
-					keymaps = {
-						['<cr>'] = 'textsubjects-smart',
-						['\''] = 'textsubjects-container-outer',
-						['i\''] = { 'textsubjects-container-inner', desc = "Select inside containers (classes, functions, etc.)" },
-					},
-				},
-			})
-		end
 	}
 }
