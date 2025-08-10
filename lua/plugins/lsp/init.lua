@@ -50,6 +50,7 @@ return {
 				"clangd",
 				"cssls",
 				"eslint",
+				"fsautocomplete",
 				"harper_ls",
 				"html",
 				"jsonls",
