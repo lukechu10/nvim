@@ -8,9 +8,11 @@ return {
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = {
-					"c", "c_sharp", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline",
-					"rust", "toml", "json", "jsonc", "javascript", "typescript", "tsx",
-					"css", "html", "bash", "python", "typst"
+					"c", "rust", "c_sharp", "fsharp",
+					"javascript", "typescript", "tsx", "css", "html",
+					"python", "lua", "bash", "fish",
+					"toml", "json", "jsonc",
+					"typst", "vim", "vimdoc", "query", "markdown", "markdown_inline",
 				},
 				highlight = {
 					enable = true,
