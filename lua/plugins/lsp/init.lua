@@ -56,7 +56,7 @@ return {
 				"jsonls",
 				"lua_ls",
 				"nil_ls",
-				"omnisharp",
+				"roslyn_ls",
 				"tailwindcss",
 				"taplo",
 				"tinymist",
