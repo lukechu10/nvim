@@ -97,3 +97,6 @@ vim.cmd [[ set modeline ]]
 -- Redefine j and k to be more intuitive for soft-wrapped lines.
 vim.keymap.set({ "n", "x" }, "j", "gj")
 vim.keymap.set({ "n", "x" }, "k", "gk")
+
+-- Enable LSP inlay hints
+vim.lsp.inlay_hint.enable()
