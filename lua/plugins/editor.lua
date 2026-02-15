@@ -109,6 +109,19 @@ return {
 				store_selection_keys = "<tab>",
 				load_ft_func = require("luasnip.extras.filetype_functions").from_filetype_load
 			})
+
+			-- Unlink snippet on mode change (e.g. from insert to normal).
+			vim.api.nvim_create_autocmd('ModeChanged', {
+				pattern = '*',
+				callback = function()
+					if ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
+						and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
+						and not require('luasnip').session.jump_active
+					then
+						require('luasnip').unlink_current()
+					end
+				end
+			})
 		end
 	},
 	{
