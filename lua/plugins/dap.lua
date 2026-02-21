@@ -66,8 +66,6 @@ return {
 			}
 			dap.configurations.c = dap.configurations.cpp
 			dap.configurations.rust = dap.configurations.cpp
-
-			require("dap.ext.vscode").load_launchjs(nil, { lldb = { "c", "cpp", "rust" } })
 		end,
 	},
 	{
