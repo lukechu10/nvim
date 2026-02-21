@@ -9,7 +9,7 @@ return {
 				"c", "rust", "c_sharp", "fsharp",
 				"javascript", "typescript", "tsx", "css", "html",
 				"python", "lua", "bash", "fish",
-				"toml", "json", "jsonc", "yaml",
+				"toml", "json", "yaml",
 				"hyprlang", "nix",
 				"typst", "vim", "vimdoc", "query", "markdown", "markdown_inline",
 			}
