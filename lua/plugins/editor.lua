@@ -60,7 +60,7 @@ return {
 
 	{
 		"saghen/blink.cmp",
-		dependencies = { "L3MON4D3/LuaSnip", version = "v2.*" },
+		dependencies = { "L3MON4D3/LuaSnip" },
 		version = "*",
 		opts = {
 			snippets = { preset = "luasnip" },
@@ -90,19 +90,21 @@ return {
 
 	{
 		"L3MON4D3/LuaSnip",
-		event = "VeryLazy",
+		version = "v2.*",
 		build = "make install_jsregexp",
 		keys = {
 			{
 				"<leader>L",
-				function() require("luasnip.loaders.from_lua").load({ paths = "./lua/plugins/snippets" }) end,
+				function()
+					require("luasnip.loaders.from_lua").lazy_load({ paths = { "./lua/plugins/snippets" } })
+				end,
 				desc = "Reload snippets"
 			}
 		},
 		config = function()
 			local ls = require('luasnip')
 
-			require("luasnip.loaders.from_lua").load({ paths = "./lua/plugins/snippets" })
+			require("luasnip.loaders.from_lua").lazy_load({ paths = { "./lua/plugins/snippets" } })
 
 			ls.setup({
 				enable_autosnippets = true,
