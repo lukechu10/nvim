@@ -8,3 +8,5 @@ vim.opt_local.spelllang = "en_gb"
 vim.cmd [[inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u]]
 
 vim.opt_local.commentstring = "// %s"
+
+vim.keymap.set("n", "<leader>cp", "<cmd>TypstPreviewToggle<cr>", { buffer = true, desc = "Toggle typst preview" })

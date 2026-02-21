@@ -9,9 +9,6 @@ return {
 				["tinymist"] = "tinymist",
 				["websocat"] = nil,
 			}
-		},
-		keys = {
-			{ "<leader>tt", "<cmd>TypstPreviewToggle<cr>", desc = "Toggle typst preview" },
 		}
 	}
 }
