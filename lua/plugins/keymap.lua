@@ -54,6 +54,7 @@ return {
 			{ "<leader>bl", "<cmd>blast<cr>",        desc = "Last" },
 			{ "<leader>bn", "<cmd>enew<cr>",         desc = "New buffer in fullscreen" },
 			{ "<leader>bv", "<cmd>vnew<cr>",         desc = "New buffer with vertical split" },
+			{ "<leader>g",  group = "git" },
 			{ "<leader>c",  group = "lsp/ai" },
 			{ "<leader>cc", group = "code-companion" },
 			{ "<leader>f",  group = "find" },

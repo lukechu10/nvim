@@ -65,7 +65,7 @@ return {
 		opts = {
 			snippets = { preset = "luasnip" },
 			keymap = {
-				preset = "super-tab",
+				preset = "default",
 				["<C-j>"] = { "select_next", "fallback" },
 				["<C-k>"] = { "select_prev", "fallback" },
 			},
@@ -130,6 +130,9 @@ return {
 		"sindrets/diffview.nvim",
 		event = "VeryLazy",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<CR>", { desc = "Open DiffView" })
+		end
 	},
 
 	{

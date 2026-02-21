@@ -21,7 +21,7 @@ return {
 		},
 	},
 	keys = {
-		{ "<leader>g", function() Snacks.lazygit() end,       desc = "Open lazygit" },
-		{ "<A-h>",     function() Snacks.explorer.open() end, desc = "Open file explorer" },
+		{ "<leader>gg", function() Snacks.lazygit() end,       desc = "Open lazygit" },
+		{ "<A-h>",      function() Snacks.explorer.open() end, desc = "Open file explorer" },
 	}
 }
