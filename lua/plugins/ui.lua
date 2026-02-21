@@ -62,6 +62,21 @@ return {
 		end
 	},
 
+	-- Plugin to show LSP progress and messages from vim.notify
+	{
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup {
+				notification = {
+					override_vim_notify = true,
+				}
+			}
+			require("telescope").load_extension("fidget")
+
+			vim.keymap.set("n", "<leader>fm", "<cmd>Telescope fidget<cr>", { desc = "Find message" })
+		end
+	},
+
 	{ "stevearc/dressing.nvim", event = "VeryLazy" },
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -84,26 +99,4 @@ return {
 	},
 
 	"nvim-tree/nvim-web-devicons",
-
-	-- Themes
-	"folke/tokyonight.nvim",
-	"ellisonleao/gruvbox.nvim",
-	"maxmx03/solarized.nvim",
-	{
-		"catppuccin/nvim",
-		config = function()
-			require("catppuccin").setup({
-				integrations = {
-					blink_cmp = true,
-					mason = true,
-					telescope = {
-						enabled = true,
-						style = "nvchad",
-					},
-					lsp_trouble = true,
-					which_key = true,
-				}
-			})
-		end
-	}
 }
