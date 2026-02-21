@@ -35,10 +35,7 @@ require("lazy").setup({
 	},
 	ui = {
 		border = "rounded",
-	},
-	change_detection = {
-		notify = false,
-	},
+	}
 })
 
 vim.o.background = "dark"
