@@ -1,6 +1,6 @@
 vim.loader.enable() -- enable experimental lua module loader
 
-vim.cmd [[ set guifont=CaskaydiaCove\ Nerd\ Font:h10 ]]
+vim.cmd [[ set guifont=FiraCode\ Nerd\ Font:h11 ]]
 if vim.fn.executable("fish") == 1 then
 	vim.opt.shell = "fish"
 elseif vim.fn.executable("pwsh.exe") == 1 then
