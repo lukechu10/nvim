@@ -133,18 +133,6 @@ return {
 	},
 
 	{
-		"zbirenbaum/copilot.lua",
-		event = "VeryLazy",
-		config = function()
-			require("copilot").setup({
-				suggestion = {
-					auto_trigger = true,
-				}
-			})
-		end
-	},
-
-	{
 		"folke/zen-mode.nvim",
 		opts = {
 			width = 100,

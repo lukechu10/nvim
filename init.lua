@@ -100,3 +100,5 @@ vim.keymap.set({ "n", "x" }, "k", "gk")
 
 -- Enable LSP inlay hints
 vim.lsp.inlay_hint.enable()
+
+vim.opt.splitright = true
