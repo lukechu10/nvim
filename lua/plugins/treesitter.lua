@@ -28,10 +28,7 @@ return {
 						vim.opt_local.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
 					end
 
-					if vim.treesitter.query.get(lang, "folds") then
-						vim.opt_local.foldmethod = "expr"
-						vim.opt_local.foldexpr = "v:lua.require('nvim-treesitter').foldexpr()"
-					end
+					-- Folding is handled by nvim-ufo so we don't need to set it up here.
 				end
 			})
 		end
