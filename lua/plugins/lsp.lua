@@ -101,10 +101,4 @@ return {
 		event = "VeryLazy",
 		dependencies = "williamboman/mason.nvim"
 	},
-	{
-		"mrcjkb/rustaceanvim",
-		version = "*",
-		lazy = false,
-		ft = { "rust" },
-	},
 }
