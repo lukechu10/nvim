@@ -41,8 +41,16 @@ return {
 				settings = {
 					["nil"] = {
 						formatting = { command = { "nixfmt" } }
-					}
-				}
+					},
+				},
+			})
+
+			vim.lsp.config("harper_ls", {
+				settings = {
+					["harper-ls"] = {
+						dialect = "British",
+					},
+				},
 			})
 
 			vim.lsp.enable({
