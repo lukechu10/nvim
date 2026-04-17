@@ -30,5 +30,5 @@ return {
 				cmd = vim.opt.shell._value,
 			})
 		end,
-	}
+	},
 }

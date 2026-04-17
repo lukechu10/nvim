@@ -77,22 +77,6 @@ return {
 		end
 	},
 
-	{ "stevearc/dressing.nvim", event = "VeryLazy" },
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		event = "BufReadPre",
-		main = "ibl",
-		opts = {
-			indent = { char = "│" },
-			exclude = {
-				filetypes = { "help", "dashboard", "lazy" },
-			},
-			scope = {
-				enabled = false,
-			},
-		},
-	},
-
 	{
 		"RRethy/vim-illuminate",
 		event = "VeryLazy"

@@ -11,6 +11,15 @@ return {
 			enabled = true,
 			replace_netrw = true,
 		},
+		indent = {
+			enabled = true,
+			animate = {
+				enabled = false,
+			},
+		},
+		input = {
+			prompt_pos = "left",
+		},
 		lazygit = {
 			enabled = true,
 			win = {
@@ -19,6 +28,18 @@ return {
 				}
 			}
 		},
+		picker = {
+			ui_select = true,
+		},
+
+		styles = {
+			input = {
+				relative = "cursor",
+				row = -3,
+				col = 0,
+				height = 1,
+			}
+		}
 	},
 	keys = {
 		{ "<leader>gg", function() Snacks.lazygit() end,       desc = "Open lazygit" },
