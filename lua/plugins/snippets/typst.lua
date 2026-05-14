@@ -551,14 +551,6 @@ return {
 	sm({ trig = "sr", name = "(V) Square Root" }, fmt([[sqrt({}) {}]], { d(1, get_visual), i(0) })),
 	postfixm({ trig = ".sr", name = "(W) Square Root", priority = 1001 }, { l("sqrt(" .. l.POSTFIX_MATCH .. ") ") }),
 
-	sm({ trig = "inv", name = "Inverse (^-1)", wordTrig = false }, { t("^(-1)") }),
-	sm({ trig = "sq", name = "Squared (^2)", wordTrig = false }, { t("^2") }),
-	sm({ trig = "cb", name = "Cubed (^3)", wordTrig = false }, { t("^3") }),
-	sm({ trig = "td", name = "To the Power of {exponent}", wordTrig = false },
-		fmt([[({})^{} {}]], { d(1, get_visual), i(2), i(0) })),
-
-	sm({ trig = "compl", name = "Complement (^complement)", wordTrig = false }, { t("^complement") }),
-
 	-- Symbols
 	sm(
 		{ trig = "==", name = "equals aligned" },
