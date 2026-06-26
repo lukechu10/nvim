@@ -145,7 +145,7 @@ return {
 			{
 				"<leader>Z",
 				"<cmd>ZenMode<CR>",
-				desc = "Toggle Zen Mode",
+				desc = "Toggle zen mode",
 			}
 		}
 	},
