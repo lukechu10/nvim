@@ -18,7 +18,18 @@ end
 
 
 return {
-	"folke/neoconf.nvim",
+	{
+		"mrjones2014/codesettings.nvim",
+		lazy = false,
+		config = function()
+			vim.lsp.config('*', {
+				before_init = function(_, config)
+					local codesettings = require('codesettings')
+					codesettings.with_local_settings(config.name, config)
+				end,
+			})
+		end
+	},
 	{
 		"folke/lazydev.nvim",
 		ft = "lua",
@@ -36,7 +47,6 @@ return {
 		dependencies = { "folke/neoconf.nvim", "saghen/blink.cmp" },
 		event = "VeryLazy",
 		config = function()
-			require("neoconf").setup {}
 			vim.lsp.config("nil_ls", {
 				settings = {
 					["nil"] = {
