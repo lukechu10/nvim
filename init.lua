@@ -39,7 +39,7 @@ require("lazy").setup({
 })
 
 vim.o.background = "dark"
-vim.cmd [[colorscheme catppuccin-mocha]]
+vim.cmd [[colorscheme gruvbox-material]]
 
 vim.cmd [[set tabstop=4]]
 vim.cmd [[set shiftwidth=4]]
@@ -78,7 +78,8 @@ if vim.fn.executable("wl-copy") == 1 then
 				return vim.fn.systemlist('wl-paste --no-newline|sed -e \"s/\r\\$//\"', { '' }, 1) -- '1' keeps empty lines
 			end,
 			["*"] = function()
-				return vim.fn.systemlist('wl-paste --primary --no-newline|sed -e \"s/\r\\$//\"', { '' }, 1)
+				return vim.fn.systemlist('wl-paste --primary --no-newline|sed -e \"s/\r\\$//\"', { '' },
+					1)
 			end,
 		}
 	}
